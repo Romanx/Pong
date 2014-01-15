@@ -1,4 +1,4 @@
 Pong
 ====
 
-The CI346 Pong Projec.
+The CI346 Pong Project.

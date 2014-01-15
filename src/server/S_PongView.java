@@ -1,6 +1,7 @@
 package server;
 
-import common.*;
+import common.GameObject;
+import common.NetObjectWriter;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -18,7 +19,8 @@ class S_PongView implements Observer
 
   public S_PongView( NetObjectWriter c1, NetObjectWriter c2 )
   {
-    left = c1; right = c2;
+      this.left = c1;
+      this.right = c2;
   }
 
   /**
@@ -29,9 +31,15 @@ class S_PongView implements Observer
   public void update( Observable aPongModel, Object arg )
   {
     S_PongModel model = (S_PongModel) aPongModel;
-    ball  = model.getBall();
-    bats  = model.getBats();
-    // Now need to send position of game objects to the client
+      this.ball = model.getBall();
+      this.bats = model.getBats();
+
+      left.put(model);
+      right.put(model);
+
+      //TODO: Send the position of games objects to client.
+
+      // Now need to send position of game objects to the client
     //  as the model on the server has changed
   }
 

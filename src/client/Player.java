@@ -37,6 +37,7 @@ class Player extends Thread
         // Update model with this information, Redisplay model
         DEBUG.trace("Player.run");
         DEBUG.trace("Socket: " + socket.getInetAddress() + ", " + socket.getPort());
+        model.modelChanged();
 
         try {
             NetObjectReader in = new NetObjectReader(socket);
@@ -44,13 +45,13 @@ class Player extends Thread
             while (true) {
                 Object obj = in.get();
                 if (obj == null) return;
-
-                C_PongModel model = (C_PongModel) obj;
-
-                DEBUG.trace("Woo");
+                DEBUG.trace((String) obj);
+                //C_PongModel model = (C_PongModel) obj;
             }
 
+
         } catch (Exception ex) {
+            ex.printStackTrace();
             DEBUG.error("Exception player.run : Client - " + ex.getMessage());
         }
 

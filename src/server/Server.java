@@ -10,12 +10,11 @@ import java.net.Socket;
 
 /**
  * Start the game server
- *  The call to makeActiveObject() in the model 
- *   starts the play of the game
+ * The call to makeActiveObject() in the model
+ * starts the play of the game
  */
-class Server
-{
-    private NetObjectWriter p0, p1;
+class Server {
+    private NetObjectWriter p0, p1 = null;
 
     public static void main(String args[]) {
         (new Server()).start();
@@ -50,12 +49,12 @@ class Server
         try {
 
             ServerSocket ss = new ServerSocket(Global.PORT);  // Server Socket
-            NetObjectReader in;
-            NetObjectWriter out;
+
             while (true) {
                 Socket s = ss.accept();
-                in = new NetObjectReader(s);
-                out = new NetObjectWriter(s);
+                NetObjectReader in = new NetObjectReader(s);
+                NetObjectWriter out = new NetObjectWriter(s);
+
                 DEBUG.trace("%s", "Connected!");
 
                 Object obj = in.get();
@@ -64,28 +63,28 @@ class Server
 
                 if (message.equals("Connect")) {
                     if (p0 == null) {
-                        //new Player(0, model, s);
                         p0 = out;
                         p0.put("Connected");
-                        (new Player(0, model, s)).start();
+                        (new server.Player(0, model, s)).start();
                         DEBUG.trace("Player One Connected");
                     } else if (p1 == null) {
-                        //new Player(1, model, s);
                         p1 = out;
-                        p1.put("Player Two Connected");
-                    } else {
-                        out.put("No More Room!");
-                        //TODO: Spectators
+                        p1.put("Connected");
+                        (new server.Player(0, model, s)).start();
+                        DEBUG.trace("Player Two Connected");
                     }
                 }
 
-                in.close();
-                out.close();
+                //in.close();
+                //out.close();
+
                 //s.close();
             }
 
         } catch (Exception ex) {
+            ex.printStackTrace();
             DEBUG.error("%s : Location[Server.makeContactWithClients()]", ex.getMessage());
+
         }
 
         //TODO: makeContactWithClients Do This Method.
@@ -123,19 +122,18 @@ class Player extends Thread {
     {
         DEBUG.trace("player.run : Server");
         DEBUG.trace("Socket: " + socket.getInetAddress() + ", " + socket.getPort());
-        NetObjectWriter in;
 
-        while (true) {
-            if (model.hasChanged()) {
-                try {
-                    in = new NetObjectWriter(socket);
-                    in.put(model);
+        try {
+            NetObjectReader in = new NetObjectReader(socket);
 
-                } catch (Exception ex) {
-                    DEBUG.error("Exception player.run : Server - " + ex.getMessage());
-                }
+            while (true) {
+                Object obj = in.get();
+                if (obj == null) return;
+                DEBUG.trace((String) obj);
             }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            DEBUG.error("Exception player.run : Server - " + ex.getMessage());
         }
-
     }
 }

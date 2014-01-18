@@ -1,9 +1,13 @@
 package client;
 
 import common.DEBUG;
+import common.GameObject;
 import common.NetObjectReader;
+import common.NetObjectWriter;
 
 import java.net.Socket;
+import java.util.Scanner;
+
 /**
  * Individual player run as a separate thread to allow
  * updates immediately the bat is moved
@@ -12,6 +16,8 @@ class Player extends Thread
 {
     private C_PongModel model;
     private Socket socket;
+    private NetObjectReader in;
+    private NetObjectWriter out;
 
     /**
      * Constructor
@@ -25,6 +31,9 @@ class Player extends Thread
         // The player needs to know this to be able to work
     }
 
+    public NetObjectWriter getPlayerOutput() {
+        return this.out;
+    }
 
     /**
      * Get and update the model with the latest bat movement
@@ -40,20 +49,56 @@ class Player extends Thread
         model.modelChanged();
 
         try {
-            NetObjectReader in = new NetObjectReader(socket);
+            //NetObjectReader in = new NetObjectReader(socket);
+            //NetObjectWriter out = new NetObjectWriter(this.socket);
 
-            while (true) {
-                Object obj = in.get();
-                if (obj == null) return;
-                DEBUG.trace((String) obj);
-                //C_PongModel model = (C_PongModel) obj;
+            try {
+                out = new NetObjectWriter(this.socket);
+                in = new NetObjectReader(this.socket);
+            } catch(Exception ex) {
+                ex.printStackTrace();
+                DEBUG.error("Exception player.constructor : Client - " + ex.getMessage());
             }
 
+            DEBUG.trace("Connecting");
+            out.put("Connect");
 
-        } catch (Exception ex) {
+            Object obj = in.get();
+            if (obj != null) {
+                String message = (String) obj;
+                DEBUG.trace("RESULT: %s", message);
+
+                if (message.equals("Connected")) {
+                    while (true) {
+                        obj = in.get();
+                        if (obj != null) {
+                            Scanner s = new Scanner((String)obj);
+                            float bX, bY, b0Y, b1Y;
+                            bX = s.nextFloat();
+                            bY = s.nextFloat();
+                            b0Y = s.nextFloat();
+                            b1Y = s.nextFloat();
+
+                            GameObject ball = model.getBall();
+                            GameObject[] bats = model.getBats();
+
+                            ball.setX(bX);
+                            ball.setY(bY);
+                            bats[0].setY(b0Y);
+                            bats[1].setY(b1Y);
+
+                            //Notify Model has Changed.
+                            model.modelChanged();
+                        }
+                    }
+                } else {
+                    DEBUG.trace(message);
+                }
+            }
+
+        } catch(Exception ex) {
             ex.printStackTrace();
-            DEBUG.error("Exception player.run : Client - " + ex.getMessage());
+            DEBUG.error("Exception player.constructor : Client - " + ex.getMessage());
         }
-
     }
 }

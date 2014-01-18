@@ -1,12 +1,10 @@
 package server;
 
-import common.DEBUG;
-import common.Global;
-import common.NetObjectReader;
-import common.NetObjectWriter;
+import common.*;
 
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
 /**
  * Start the game server
@@ -15,6 +13,7 @@ import java.net.Socket;
  */
 class Server {
     private NetObjectWriter p0, p1 = null;
+    private int NUM_PLAYERS = 0;
 
     public static void main(String args[]) {
         (new Server()).start();
@@ -35,7 +34,7 @@ class Server {
         S_PongController cont = new S_PongController(model, view);
 
         model.addObserver(view);       // Add observer to the model
-        model.makeActiveObject();        // Start play
+        model.makeActiveObject();      // Start play
     }
 
     /**
@@ -50,10 +49,10 @@ class Server {
 
             ServerSocket ss = new ServerSocket(Global.PORT);  // Server Socket
 
-            while (true) {
+            do {
                 Socket s = ss.accept();
-                NetObjectReader in = new NetObjectReader(s);
-                NetObjectWriter out = new NetObjectWriter(s);
+                Player p = new server.Player(NUM_PLAYERS, model, s);
+                NetObjectReader in = p.getPlayerInput();
 
                 DEBUG.trace("%s", "Connected!");
 
@@ -63,23 +62,20 @@ class Server {
 
                 if (message.equals("Connect")) {
                     if (p0 == null) {
-                        p0 = out;
-                        p0.put("Connected");
-                        (new server.Player(0, model, s)).start();
+                        p0 = p.getPlayerOutput();
+                        p.start();
                         DEBUG.trace("Player One Connected");
+                        NUM_PLAYERS++;
                     } else if (p1 == null) {
-                        p1 = out;
-                        p1.put("Connected");
-                        (new server.Player(0, model, s)).start();
-                        DEBUG.trace("Player Two Connected");
+                        p1 = p.getPlayerOutput();
+                        p.start();
+                        DEBUG.trace("Player One Connected");
+                        NUM_PLAYERS++;
                     }
                 }
 
-                //in.close();
-                //out.close();
+            } while (NUM_PLAYERS < 2);
 
-                //s.close();
-            }
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -101,6 +97,9 @@ class Player extends Thread {
     private int playerNumber;
     private Socket socket;
 
+    private NetObjectReader in;
+    private NetObjectWriter out;
+
     /**
      * Constructor
      *
@@ -112,6 +111,15 @@ class Player extends Thread {
         this.model = model;
         this.playerNumber = player;
         this.socket = s;
+
+        try {
+            in = new NetObjectReader(socket);
+            out = new NetObjectWriter(socket);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            DEBUG.error("Exception player.run : Server - " + ex.getMessage());
+        }
+
     }
 
 
@@ -123,17 +131,23 @@ class Player extends Thread {
         DEBUG.trace("player.run : Server");
         DEBUG.trace("Socket: " + socket.getInetAddress() + ", " + socket.getPort());
 
-        try {
-            NetObjectReader in = new NetObjectReader(socket);
+        out.put("Connected");
 
-            while (true) {
-                Object obj = in.get();
-                if (obj == null) return;
-                DEBUG.trace((String) obj);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            DEBUG.error("Exception player.run : Server - " + ex.getMessage());
+        while (true) {
+            Object obj = in.get();
+            if (obj == null) return;
+            DEBUG.trace(String.format("Player %d: %s", playerNumber, (String) obj));
+            Scanner s = new Scanner((String) obj);
+
+            float batY = s.nextFloat();
+
+            GameObject bat = this.model.getBat(playerNumber);
+            bat.setY(bat.getY() + batY);
+
+            this.model.modelChanged();
         }
     }
+
+    public NetObjectReader getPlayerInput() { return this.in; }
+    public NetObjectWriter getPlayerOutput() {return this.out; }
 }

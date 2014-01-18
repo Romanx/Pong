@@ -12,6 +12,7 @@ import java.net.Socket;
  */
 class Client
 {
+
     public static void main(String args[]) {
         (new Client()).start();
     }
@@ -43,30 +44,13 @@ class Client
     public void makeContactWithServer(C_PongModel model,
                                       C_PongController cont) {
         try {
-            NetObjectWriter out;
-            NetObjectReader in;
 
             Socket s = new Socket(Global.HOST, Global.PORT);
-            out = new NetObjectWriter(s);
-            in = new NetObjectReader(s);
 
             DEBUG.trace("Trying to Connect.");
-            out.put("Connect");
-
-            Object obj = in.get();
-            if (obj != null) {
-                String message = (String) obj;
-                DEBUG.trace("RESULT: %s", message);
-
-                if (message.equals("Connected")) {
-                    (new Player(model, s)).start();//new Socket(s.getInetAddress(), s.getPort()))).start();
-                } else {
-                    DEBUG.trace(message);
-                }
-            }
-
-            //in.close();
-            //out.close();
+            Player p = new Player(model, s);
+            cont.setPlayer(p);
+            p.start();
 
         } catch (Exception ex) {
             ex.printStackTrace();

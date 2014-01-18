@@ -80,7 +80,7 @@ public class S_PongModel extends Observable {
      * Cause update of view of game
      */
     public void modelChanged() {
-        DEBUG.trace("S_PongModel.modelChanged");
+        //DEBUG.trace("S_PongModel.modelChanged");
         setChanged();
         notifyObservers();
     }

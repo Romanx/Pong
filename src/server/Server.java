@@ -4,6 +4,7 @@ import common.*;
 
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -14,9 +15,28 @@ import java.util.Scanner;
 class Server {
     private NetObjectWriter p0, p1 = null;
     private int NUM_PLAYERS = 0;
+    private int threadNo = 0;
+    private ServerSocket ss = null;
+
+    public Server(int threadNo, ServerSocket socket) {
+        this.threadNo = threadNo;
+        this.ss = socket;
+    }
 
     public static void main(String args[]) {
-        (new Server()).start();
+
+        try {
+            ServerSocket socket = new ServerSocket(Global.PORT);  // Server Socket
+            int threadNo = 0;
+
+            while(threadNo < 3) {
+                (new Server(threadNo, socket)).start();
+                threadNo++;
+            }
+        } catch(Exception ex) {
+            ex.printStackTrace();
+            DEBUG.error("%s : Location[Server.main()]", ex.getMessage());
+        }
     }
 
     /**
@@ -24,7 +44,7 @@ class Server {
      */
     public void start() {
         DEBUG.set(true);
-        DEBUG.trace("Pong Server");
+        DEBUG.trace("Pong Server " + this.threadNo);
         //DEBUG.set( false );               // Otherwise lots of debug info
         S_PongModel model = new S_PongModel();
 
@@ -46,9 +66,6 @@ class Server {
     public void makeContactWithClients(S_PongModel model) {
 
         try {
-
-            ServerSocket ss = new ServerSocket(Global.PORT);  // Server Socket
-
             do {
                 Socket s = ss.accept();
                 Player p = new server.Player(NUM_PLAYERS, model, s);
@@ -63,27 +80,21 @@ class Server {
                 if (message.equals("Connect")) {
                     if (p0 == null) {
                         p0 = p.getPlayerOutput();
-                        p.start();
-                        DEBUG.trace("Player One Connected");
-                        NUM_PLAYERS++;
+                        DEBUG.trace("%s : %s", "Server " + threadNo, "Player One Connected");
                     } else if (p1 == null) {
                         p1 = p.getPlayerOutput();
-                        p.start();
-                        DEBUG.trace("Player One Connected");
-                        NUM_PLAYERS++;
+                        DEBUG.trace("Player Two Connected");
                     }
+                    NUM_PLAYERS++;
+                    p.start();
                 }
 
             } while (NUM_PLAYERS < 2);
 
-
         } catch (Exception ex) {
             ex.printStackTrace();
             DEBUG.error("%s : Location[Server.makeContactWithClients()]", ex.getMessage());
-
         }
-
-        //TODO: makeContactWithClients Do This Method.
     }
 }
 

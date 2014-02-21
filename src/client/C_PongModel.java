@@ -1,7 +1,9 @@
 package client;
 
+import common.DEBUG;
 import common.GameObject;
 
+import java.util.Date;
 import java.util.Observable;
 
 import static common.Global.*;
@@ -12,7 +14,7 @@ import static common.Global.*;
 public class C_PongModel extends Observable {
     private GameObject ball = new GameObject(W / 2, H / 2, BALL_SIZE, BALL_SIZE);
     private GameObject bats[] = new GameObject[2];
-
+    private long requestTime = 0l;
 
     public C_PongModel() {
         bats[0] = new GameObject(60, H / 2, BAT_WIDTH, BAT_HEIGHT);
@@ -63,4 +65,20 @@ public class C_PongModel extends Observable {
         notifyObservers();
     }
 
+    public long getPingTime() {
+        if(this.requestTime > 0) {
+            return  System.currentTimeMillis() - this.requestTime;
+        } else {
+            return -1;
+        }
+
+    }
+
+    public float getRequestTime() {
+        return this.requestTime;
+    }
+
+    public void setRequestTime(long requestTime) {
+        this.requestTime = requestTime;
+    }
 }

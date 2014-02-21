@@ -6,6 +6,7 @@ import common.NetObjectReader;
 import common.NetObjectWriter;
 
 import java.net.Socket;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -41,17 +42,12 @@ class Player extends Thread
      */
     public void run()                             // Execution
     {
-        // Listen to network to get the latest state of the
-        // game from the server
+        // Listen to network to get the latest state of the game from the server
         // Update model with this information, Redisplay model
         DEBUG.trace("Player.run");
         DEBUG.trace("Socket: " + socket.getInetAddress() + ", " + socket.getPort());
-        model.modelChanged();
 
         try {
-            //NetObjectReader in = new NetObjectReader(socket);
-            //NetObjectWriter out = new NetObjectWriter(this.socket);
-
             try {
                 out = new NetObjectWriter(this.socket);
                 in = new NetObjectReader(this.socket);
@@ -71,21 +67,22 @@ class Player extends Thread
                 if (message.equals("Connected")) {
                     while (true) {
                         obj = in.get();
+                        model.setRequestTime(System.currentTimeMillis());
                         if (obj != null) {
                             Scanner s = new Scanner((String)obj);
-                            float bX, bY, b0Y, b1Y;
-                            bX = s.nextFloat();
-                            bY = s.nextFloat();
-                            b0Y = s.nextFloat();
-                            b1Y = s.nextFloat();
+                            float ballX, ballY, batZeroY, batOneY;
+                            ballX = s.nextFloat();
+                            ballY = s.nextFloat();
+                            batZeroY = s.nextFloat();
+                            batOneY = s.nextFloat();
 
                             GameObject ball = model.getBall();
                             GameObject[] bats = model.getBats();
 
-                            ball.setX(bX);
-                            ball.setY(bY);
-                            bats[0].setY(b0Y);
-                            bats[1].setY(b1Y);
+                            ball.setX(ballX);
+                            ball.setY(ballY);
+                            bats[0].setY(batZeroY);
+                            bats[1].setY(batOneY);
 
                             //Notify Model has Changed.
                             model.modelChanged();

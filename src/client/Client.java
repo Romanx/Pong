@@ -44,7 +44,7 @@ class Client
     public void makeContactWithServer(C_PongModel model,
                                       C_PongController cont) {
         try {
-
+            // Also starts the Player task that get the current state of the game from the server
             Socket s = new Socket(Global.HOST, Global.PORT);
 
             DEBUG.trace("Trying to Connect.");
@@ -58,8 +58,5 @@ class Client
         }
 
 
-        //TODO: makeContactWithServer Do This Method.
-        // Also starts the Player task that get the current state
-        //  of the game from the server
     }
 }

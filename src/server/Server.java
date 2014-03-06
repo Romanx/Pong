@@ -6,6 +6,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Start the game server
@@ -18,21 +21,21 @@ class Server {
     private int threadNo = 0;
     private ServerSocket ss = null;
 
+    private final static AtomicInteger threadCount = new AtomicInteger(0);
+
     public Server(int threadNo, ServerSocket socket) {
         this.threadNo = threadNo;
         this.ss = socket;
     }
 
     public static void main(String args[]) {
-
         try {
             ServerSocket socket = new ServerSocket(Global.PORT);  // Server Socket
-            int threadNo = 0;
+            //  int threadNo = 0;
 
             //TODO: Remove the limit or adjust for a ThreadPool.
-            while(threadNo < 3) {
-                (new Server(threadNo, socket)).start();
-                threadNo++;
+            while(threadCount.get() < 3) {
+                (new Server(threadCount.getAndIncrement(), socket)).start();
             }
         } catch(Exception ex) {
             ex.printStackTrace();
@@ -56,6 +59,8 @@ class Server {
 
         model.addObserver(view);       // Add observer to the model
         model.makeActiveObject();      // Start play
+
+        threadCount.decrementAndGet();
     }
 
     /**
@@ -103,7 +108,6 @@ class Server {
  * Individual player run as a separate thread to allow
  * updates to the model when a player moves there bat
  */
-//TODO: implement this class.
 class Player extends Thread {
     private S_PongModel model;
     private int playerNumber;

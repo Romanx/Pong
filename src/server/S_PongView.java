@@ -52,7 +52,7 @@ class S_PongView implements Observer {
             }
 
             left.put(new Object[]{result, model.getRequestTime(0)});
-            DEBUG.trace("Player Ones Ping is Lower than Player Twos.");
+            //DEBUG.trace("Player Ones Ping is Lower than Player Twos.");
         } else {
             left.put(new Object[]{result, model.getRequestTime(0)});
 
@@ -63,7 +63,7 @@ class S_PongView implements Observer {
                 e.printStackTrace();
             }
             right.put(new Object[] {result, model.getRequestTime(1)});
-            DEBUG.trace("Player Twos Ping is Lower than Player Ones.");
+            //DEBUG.trace("Player Twos Ping is Lower than Player Ones.");
         }
 
         //Remove the old request since we've told the client about it.

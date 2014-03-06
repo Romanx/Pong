@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="92dcc669-2a41-4ec2-9635-25029d2df56e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
     </list>
     <ignored path="Pong.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -58,21 +58,6 @@
     </breakpoint_any>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/client/Player.java" line="73" class="client.Player" package="client">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
       <breakpoint url="file://$PROJECT_DIR$/src/server/Server.java" line="159" class="server.Player" package="server">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
@@ -143,64 +128,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Player.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/Player.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="75" column="57" selection-start="2356" selection-end="2356" vertical-scroll-proportion="0.0" vertical-offset="1275" max-vertical-offset="1887">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameObject.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/common/GameObject.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="0" selection-start="1304" selection-end="1304" vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="1717">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="S_ActiveModel.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/server/S_ActiveModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="29" selection-start="1785" selection-end="1785" vertical-scroll-proportion="0.0" vertical-offset="918" max-vertical-offset="1173">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="C_PongModel.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/C_PongModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="0" selection-start="1429" selection-end="1429" vertical-scroll-proportion="0.0" vertical-offset="1139" max-vertical-offset="1479">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="C_PongController.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/C_PongController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="74" selection-start="1597" selection-end="1597" vertical-scroll-proportion="0.0" vertical-offset="952" max-vertical-offset="1241">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="S_PongController.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/server/S_PongController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="1" selection-start="357" selection-end="357" vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="408">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="C_PongView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/C_PongView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="44" selection-start="793" selection-end="793" vertical-scroll-proportion="0.0" vertical-offset="527" max-vertical-offset="2992">
+            <state line="64" column="30" selection-start="2016" selection-end="2016" vertical-scroll-proportion="0.0" vertical-offset="1445" max-vertical-offset="2635">
               <folding />
             </state>
           </provider>
@@ -209,7 +140,7 @@
       <file leaf-file-name="S_PongView.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/server/S_PongView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="0" selection-start="516" selection-end="516" vertical-scroll-proportion="-0.024096385" vertical-offset="320" max-vertical-offset="901">
+            <state line="42" column="33" selection-start="1323" selection-end="1323" vertical-scroll-proportion="1.0863558" vertical-offset="0" max-vertical-offset="833">
               <folding />
             </state>
           </provider>
@@ -248,9 +179,9 @@
         <option value="$PROJECT_DIR$/src/client/C_PongController.java" />
         <option value="$PROJECT_DIR$/src/server/Server.java" />
         <option value="$PROJECT_DIR$/src/server/S_PongModel.java" />
-        <option value="$PROJECT_DIR$/src/client/Player.java" />
         <option value="$PROJECT_DIR$/src/client/C_PongModel.java" />
         <option value="$PROJECT_DIR$/src/server/S_PongView.java" />
+        <option value="$PROJECT_DIR$/src/client/Player.java" />
       </list>
     </option>
   </component>
@@ -365,7 +296,7 @@
     <property name="SearchEverywhereHistory" value="" />
     <property name="ChangesBrowser.SHOW_FLATTEN" value="false" />
   </component>
-  <component name="RunManager" selected="Application.Pong Client One">
+  <component name="RunManager" selected="Application.Pong Client Two">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin" singleton="true">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -618,7 +549,23 @@
       <created>1394113219011</created>
       <updated>1394113219011</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Committing to get rid of the file change.">
+      <created>1394113598125</created>
+      <updated>1394113598125</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Added a .gitignore file for certain java and intellij types.">
+      <created>1394114182987</created>
+      <updated>1394114182987</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Cleaned up some of the code and added some comments where it would make it more clear.">
+      <created>1394114213897</created>
+      <updated>1394114213897</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Cleaned up some of the code and added some comments where it would make it more clear.&#10;">
+      <created>1394114246492</created>
+      <updated>1394114246492</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -646,7 +593,7 @@
     <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34660926" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34735706" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901832" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -655,6 +602,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399137" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947367" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901832" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947367" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -665,7 +613,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901832" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
@@ -689,7 +636,11 @@
     <MESSAGE value="Version One Completed.&#10;&#10;&quot;The communication between client and server is based on TCP/IP at the socket level using the framework provided.&quot;" />
     <MESSAGE value="Added in multiple games being able to be played by many clients. Every two clients are paired into a game. Started working on the ping time between the client and the server. Currently the client updates the request time every time it recieves a request. Not sure this is correct." />
     <MESSAGE value="First working version of Ping." />
-    <option name="LAST_COMMIT_MESSAGE" value="First working version of Ping." />
+    <MESSAGE value="Committing to get rid of the file change." />
+    <MESSAGE value="Added a .gitignore file for certain java and intellij types." />
+    <MESSAGE value="Cleaned up some of the code and added some comments where it would make it more clear." />
+    <MESSAGE value="Cleaned up some of the code and added some comments where it would make it more clear.&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up some of the code and added some comments where it would make it more clear.&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -741,7 +692,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="22" selection-start="1364" selection-end="1364" vertical-scroll-proportion="0.0" vertical-offset="433" max-vertical-offset="1207" />
+        <state line="52" column="22" selection-start="1364" selection-end="1364" vertical-scroll-proportion="0.0" vertical-offset="433" max-vertical-offset="1207">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/server/Server.java">
@@ -800,7 +753,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="64" selection-start="1533" selection-end="1538" vertical-scroll-proportion="0.0" vertical-offset="1003" max-vertical-offset="1428" />
+        <state line="59" column="64" selection-start="1533" selection-end="1538" vertical-scroll-proportion="0.0" vertical-offset="1003" max-vertical-offset="1428">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/Player.java">
@@ -897,7 +852,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="46" selection-start="1265" selection-end="1265" vertical-scroll-proportion="0.0" vertical-offset="348" max-vertical-offset="1122" />
+        <state line="49" column="46" selection-start="1265" selection-end="1265" vertical-scroll-proportion="0.0" vertical-offset="348" max-vertical-offset="1122">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="jar://C:/Program Files (x86)/Java/jdk1.7.0_45/src.zip!/java/lang/ClassLoader.java">
@@ -917,19 +874,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/common/NetObjectWriter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="23" selection-start="778" selection-end="778" vertical-scroll-proportion="0.6296296" vertical-offset="0" max-vertical-offset="621" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/S_ActiveModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="29" selection-start="1785" selection-end="1785" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1122">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/C_PongController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="74" selection-start="1597" selection-end="1597" vertical-scroll-proportion="0.0" vertical-offset="433" max-vertical-offset="1156">
+        <state line="25" column="23" selection-start="778" selection-end="778" vertical-scroll-proportion="0.6296296" vertical-offset="0" max-vertical-offset="621">
           <folding />
         </state>
       </provider>
@@ -946,44 +891,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/common/GameObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="0" selection-start="1304" selection-end="1304" vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="1717">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/server/S_PongModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="90" column="12" selection-start="2093" selection-end="2093" vertical-scroll-proportion="0.0" vertical-offset="1013" max-vertical-offset="1666">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/C_PongView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="44" selection-start="793" selection-end="793" vertical-scroll-proportion="0.0" vertical-offset="527" max-vertical-offset="2992">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/S_PongController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="1" selection-start="357" selection-end="357" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/C_PongModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="0" selection-start="1429" selection-end="1429" vertical-scroll-proportion="0.0" vertical-offset="654" max-vertical-offset="1309">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="57" selection-start="2356" selection-end="2356" vertical-scroll-proportion="0.0" vertical-offset="833" max-vertical-offset="1734">
           <folding />
         </state>
       </provider>
@@ -1002,9 +912,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="90" column="62" selection-start="3254" selection-end="3254" vertical-scroll-proportion="0.15136877" vertical-offset="1283" max-vertical-offset="1904">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/common/GameObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="0" selection-start="1304" selection-end="1304" vertical-scroll-proportion="0.28502417" vertical-offset="486" max-vertical-offset="1717">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/S_ActiveModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="29" selection-start="1785" selection-end="1785" vertical-scroll-proportion="0.7536232" vertical-offset="399" max-vertical-offset="1122">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/C_PongModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="0" selection-start="1429" selection-end="1429" vertical-scroll-proportion="0.45249596" vertical-offset="620" max-vertical-offset="1241">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/C_PongController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="74" selection-start="1597" selection-end="1597" vertical-scroll-proportion="0.5346216" vertical-offset="535" max-vertical-offset="1156">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/S_PongController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="1" selection-start="357" selection-end="357" vertical-scroll-proportion="0.4380032" vertical-offset="0" max-vertical-offset="621">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/C_PongView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="30" selection-start="2016" selection-end="2016" vertical-scroll-proportion="0.0" vertical-offset="1445" max-vertical-offset="2635">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/server/S_PongView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="0" selection-start="516" selection-end="516" vertical-scroll-proportion="-0.024096385" vertical-offset="320" max-vertical-offset="901">
+        <state line="42" column="33" selection-start="1323" selection-end="1323" vertical-scroll-proportion="1.0863558" vertical-offset="0" max-vertical-offset="833">
           <folding />
         </state>
       </provider>

@@ -2,6 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="92dcc669-2a41-4ec2-9635-25029d2df56e" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
     </list>
     <ignored path="Pong.iws" />
@@ -140,7 +148,7 @@
       <file leaf-file-name="S_PongView.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/server/S_PongView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="33" selection-start="1323" selection-end="1323" vertical-scroll-proportion="1.0863558" vertical-offset="0" max-vertical-offset="833">
+            <state line="34" column="0" selection-start="868" selection-end="868" vertical-scroll-proportion="0.851468" vertical-offset="0" max-vertical-offset="833">
               <folding />
             </state>
           </provider>
@@ -565,7 +573,11 @@
       <created>1394114246492</created>
       <updated>1394114246492</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Removed the workspace.xml file since it's not required and ALWAYS CHANGING.">
+      <created>1394114270383</created>
+      <updated>1394114270383</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -590,10 +602,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34735706" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34735706" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901832" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -640,7 +652,8 @@
     <MESSAGE value="Added a .gitignore file for certain java and intellij types." />
     <MESSAGE value="Cleaned up some of the code and added some comments where it would make it more clear." />
     <MESSAGE value="Cleaned up some of the code and added some comments where it would make it more clear.&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up some of the code and added some comments where it would make it more clear.&#10;" />
+    <MESSAGE value="Removed the workspace.xml file since it's not required and ALWAYS CHANGING." />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed the workspace.xml file since it's not required and ALWAYS CHANGING." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -963,7 +976,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/server/S_PongView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="33" selection-start="1323" selection-end="1323" vertical-scroll-proportion="1.0863558" vertical-offset="0" max-vertical-offset="833">
+        <state line="34" column="0" selection-start="868" selection-end="868" vertical-scroll-proportion="0.851468" vertical-offset="0" max-vertical-offset="833">
           <folding />
         </state>
       </provider>

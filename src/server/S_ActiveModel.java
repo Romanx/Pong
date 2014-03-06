@@ -41,8 +41,7 @@ class S_ActiveModel implements Runnable {
 
                 // As only a hit on the bat is detected it is assumed to be
                 // on the front or back of the bat
-                // A hit on the top or bottom has an interesting affect
-
+                // A hit on the top or bottom has an interesting effect
                 if (bats[0].collision(ball) == GameObject.Collision.HIT ||
                         bats[1].collision(ball) == GameObject.Collision.HIT) {
                     ball.changeDirectionX();

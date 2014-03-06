@@ -149,16 +149,17 @@ class Player extends Thread {
             Object obj = in.get();
             if (obj == null) return;
             Object[] result = (Object[])obj;
-            DEBUG.trace(String.format("Player %d: %s", playerNumber, result[1]));
-            //Scanner s = new Scanner((String) obj);
 
             double batY = (Double)result[0];
             long timestamp = (Long)result[1];
+            long pingTime = (Long)result[2];
+
 
             // To avoid just resetting it to the same value.
             GameObject bat = this.model.getBat(playerNumber);
             this.model.setRequestTime(this.playerNumber, timestamp);
-            bat.setY(bat.getY() + batY);
+            this.model.setAveragePingTime(this.playerNumber, pingTime);
+            bat.moveY(batY);
 
             this.model.modelChanged();
         }

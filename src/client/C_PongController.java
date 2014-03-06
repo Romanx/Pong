@@ -3,6 +3,7 @@ import common.*;
 
 import java.awt.event.KeyEvent;
 import java.util.Date;
+import java.util.Random;
 
 import common.GameObject;
 /**
@@ -54,7 +55,10 @@ public class C_PongController
 
         if(batMove != 0) {
             NetObjectWriter out = this.player.getPlayerOutput();
-            out.put(new Object[] { batMove, System.currentTimeMillis() });
+            long timestamp = System.currentTimeMillis();
+            long pingTime = model.getPingTime();
+
+            out.put(new Object[]{batMove, timestamp, pingTime});
         }
 
 

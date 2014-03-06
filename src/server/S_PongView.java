@@ -6,6 +6,7 @@ import common.NetObjectWriter;
 
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
 
 
 /**
@@ -16,6 +17,7 @@ class S_PongView implements Observer {
     private GameObject ball;
     private GameObject[] bats;
     private NetObjectWriter left, right;
+    private Random r = new Random();
 
     public S_PongView(NetObjectWriter c1, NetObjectWriter c2) {
         this.left = c1;
@@ -32,12 +34,37 @@ class S_PongView implements Observer {
         S_PongModel model = (S_PongModel) aPongModel;
         this.ball = model.getBall();
         this.bats = model.getBats();
+        long playerOnePing, playerTwoPing;
+        playerOnePing = model.getAveragePingTime(0);
+        playerTwoPing = model.getAveragePingTime(1);
 
         Object[] result = new Object[] { ball.getX(), ball.getY(), this.bats[0].getY(), this.bats[1].getY()};
 
         // Now need to send position of game objects to the client as the model on the server has changed
-        left.put(new Object[]{result, model.getRequestTime(0)});
-        right.put(new Object[] {result, model.getRequestTime(1)});
+        if(playerOnePing < playerTwoPing) {
+            right.put(new Object[] {result, model.getRequestTime(1)});
+
+            // Sleep for the time that the two clients are out of sync.
+            try {
+                if(playerTwoPing - playerOnePing > 0) Thread.sleep(playerTwoPing - playerOnePing);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            left.put(new Object[]{result, model.getRequestTime(0)});
+            DEBUG.trace("Player Ones Ping is Lower than Player Twos.");
+        } else {
+            left.put(new Object[]{result, model.getRequestTime(0)});
+
+            // Sleep for the time that the two clients are out of sync.
+            try {
+                if(playerOnePing - playerTwoPing > 0) Thread.sleep(playerOnePing - playerTwoPing);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            right.put(new Object[] {result, model.getRequestTime(1)});
+            DEBUG.trace("Player Twos Ping is Lower than Player Ones.");
+        }
 
         //Remove the old request since we've told the client about it.
         model.setRequestTime(0, 0);

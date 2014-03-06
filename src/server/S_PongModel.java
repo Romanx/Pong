@@ -15,6 +15,7 @@ public class S_PongModel extends Observable {
     private GameObject ball = new GameObject(W / 2, H / 2, BALL_SIZE, BALL_SIZE);
     private GameObject bats[] = new GameObject[2];
     private long requestTime[] = new long[] { 0L, 0L };
+    private long averagePingTime[] = new long[] {0L, 0L};
 
     private Thread activeModel;
 
@@ -97,6 +98,20 @@ public class S_PongModel extends Observable {
     public void setRequestTime(int playerNumber, long requestTime) {
         if(playerNumber < this.requestTime.length) {
             this.requestTime[playerNumber] = requestTime;
+        }
+    }
+
+    public long getAveragePingTime(int playerNumber) {
+        if(playerNumber < this.averagePingTime.length) {
+            return this.averagePingTime[playerNumber];
+        } else {
+            return 0;
+        }
+    }
+
+    public void setAveragePingTime(int playerNumber, long averagePingTime) {
+        if(playerNumber < this.averagePingTime.length) {
+            this.averagePingTime[playerNumber] = averagePingTime;
         }
     }
 

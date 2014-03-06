@@ -14,7 +14,8 @@ import static common.Global.*;
 public class C_PongModel extends Observable {
     private GameObject ball = new GameObject(W / 2, H / 2, BALL_SIZE, BALL_SIZE);
     private GameObject bats[] = new GameObject[2];
-    private long requestTime = 0l;
+    private int numOfRequests = 0;
+    private long totalRequestTime;
 
     public C_PongModel() {
         bats[0] = new GameObject(60, H / 2, BAT_WIDTH, BAT_HEIGHT);
@@ -66,19 +67,15 @@ public class C_PongModel extends Observable {
     }
 
     public long getPingTime() {
-        if(this.requestTime > 0) {
-            return  System.currentTimeMillis() - this.requestTime;
+        if(numOfRequests > 0) {
+            return totalRequestTime / numOfRequests;
         } else {
-            return -1;
+            return 0L;
         }
-
     }
 
-    public float getRequestTime() {
-        return this.requestTime;
-    }
-
-    public void setRequestTime(long requestTime) {
-        this.requestTime = requestTime;
+    public void addRequestTimestamp(long timeTaken) {
+        this.numOfRequests++;
+        this.totalRequestTime += timeTaken;
     }
 }

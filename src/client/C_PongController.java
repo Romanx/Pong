@@ -54,7 +54,7 @@ public class C_PongController
 
         if(batMove != 0) {
             NetObjectWriter out = this.player.getPlayerOutput();
-            out.put(String.format("%4.2f", batMove));
+            out.put(new Object[] { batMove, System.currentTimeMillis() });
         }
 
 

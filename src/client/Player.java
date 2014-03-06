@@ -67,14 +67,18 @@ class Player extends Thread
                 if (message.equals("Connected")) {
                     while (true) {
                         obj = in.get();
-                        model.setRequestTime(System.currentTimeMillis());
                         if (obj != null) {
-                            Scanner s = new Scanner((String)obj);
-                            float ballX, ballY, batZeroY, batOneY;
-                            ballX = s.nextFloat();
-                            ballY = s.nextFloat();
-                            batZeroY = s.nextFloat();
-                            batOneY = s.nextFloat();
+                            Object[] result = (Object[])obj;
+                            double ballX, ballY, batZeroY, batOneY;
+                            long timestamp;
+                            ballX = (Double)result[0];
+                            ballY = (Double)result[1];
+                            batZeroY = (Double)result[2];
+                            batOneY = (Double)result[3];
+                            timestamp = (Long)result[4];
+                            if(timestamp > 0) {
+                                model.addRequestTimestamp(System.currentTimeMillis() - timestamp);
+                            }
 
                             GameObject ball = model.getBall();
                             GameObject[] bats = model.getBats();

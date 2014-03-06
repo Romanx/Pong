@@ -29,6 +29,7 @@ class Server {
             ServerSocket socket = new ServerSocket(Global.PORT);  // Server Socket
             int threadNo = 0;
 
+            //TODO: Remove the limit or adjust for a ThreadPool.
             while(threadNo < 3) {
                 (new Server(threadNo, socket)).start();
                 threadNo++;
@@ -147,12 +148,16 @@ class Player extends Thread {
         while (true) {
             Object obj = in.get();
             if (obj == null) return;
-            DEBUG.trace(String.format("Player %d: %s", playerNumber, (String) obj));
-            Scanner s = new Scanner((String) obj);
+            Object[] result = (Object[])obj;
+            DEBUG.trace(String.format("Player %d: %s", playerNumber, result[1]));
+            //Scanner s = new Scanner((String) obj);
 
-            float batY = s.nextFloat();
+            double batY = (Double)result[0];
+            long timestamp = (Long)result[1];
 
+            // To avoid just resetting it to the same value.
             GameObject bat = this.model.getBat(playerNumber);
+            this.model.setRequestTime(this.playerNumber, timestamp);
             bat.setY(bat.getY() + batY);
 
             this.model.modelChanged();

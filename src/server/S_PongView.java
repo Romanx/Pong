@@ -33,10 +33,14 @@ class S_PongView implements Observer {
         this.ball = model.getBall();
         this.bats = model.getBats();
 
-        String s = String.format("%4.2f %4.2f %4.2f %4.2f", ball.getX(), ball.getY(), this.bats[0].getY(), this.bats[1].getY());
+        //String s = String.format("%4.2f %4.2f %4.2f %4.2f", ball.getX(), ball.getY(), this.bats[0].getY(), this.bats[1].getY());
+        //Object[] result = new Object[] { ball.getX(), ball.getY(), this.bats[0].getY(), this.bats[1].getY(), model.getRequestTime(0), model.getRequestTime(1)};
 
-        left.put(s);
-        right.put(s);
+        left.put(new Object[]{ball.getX(), ball.getY(), this.bats[0].getY(), this.bats[1].getY(), model.getRequestTime(0)});
+        right.put(new Object[] { ball.getX(), ball.getY(), this.bats[0].getY(), this.bats[1].getY(), model.getRequestTime(1)});
+
+        model.setRequestTime(0, 0);
+        model.setRequestTime(1, 0);
 
         //TODO: Send the position of games objects to client.
 

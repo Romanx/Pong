@@ -17,6 +17,7 @@ public class NetObjectWriter extends ObjectOutputStream {
     // write object to socket returning false on error
     public synchronized boolean put(Object data) {
         try {
+            reset();
             writeObject(data);       // Write object
             flush();                   // Flush
             return true;               // Ok

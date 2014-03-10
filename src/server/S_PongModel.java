@@ -1,6 +1,5 @@
 package server;
 
-import common.DEBUG;
 import common.GameObject;
 
 import java.util.Observable;
@@ -14,8 +13,9 @@ import static common.Global.*;
 public class S_PongModel extends Observable {
     private GameObject ball = new GameObject(W / 2, H / 2, BALL_SIZE, BALL_SIZE);
     private GameObject bats[] = new GameObject[2];
-    private long requestTime[] = new long[] { 0L, 0L };
-    private long averagePingTime[] = new long[] {0L, 0L};
+    private long currentRequestTime[] = new long[] { 0L, 0L };
+    private long totalRequestTimes[] = new long[] { 0L, 0L };
+    private int totalRequestAmount[] = new int[] { 0, 0 };
 
     private Thread activeModel;
 
@@ -88,31 +88,34 @@ public class S_PongModel extends Observable {
     }
 
     public long getRequestTime(int playerNumber) {
-        if(playerNumber < this.requestTime.length) {
-            return this.requestTime[playerNumber];
+        if(playerNumber < this.currentRequestTime.length) {
+            return this.currentRequestTime[playerNumber];
         } else {
             return 0;
         }
     }
 
     public void setRequestTime(int playerNumber, long requestTime) {
-        if(playerNumber < this.requestTime.length) {
-            this.requestTime[playerNumber] = requestTime;
+        if(playerNumber < this.currentRequestTime.length) {
+            this.currentRequestTime[playerNumber] = requestTime;
         }
     }
 
-    public long getAveragePingTime(int playerNumber) {
-        if(playerNumber < this.averagePingTime.length) {
-            return this.averagePingTime[playerNumber];
+    public void addToTotalRequestTime(int playerNumber, long requestTime) {
+        if(playerNumber < this.totalRequestTimes.length) {
+            this.totalRequestTimes[playerNumber] += requestTime;
+            this.totalRequestAmount[playerNumber]++;
+        }
+    }
+
+    public long getAverageRequestTime(int playerNumber) {
+        int totalRequestAmount = this.totalRequestAmount[playerNumber];
+        long totalRequestTime = this.totalRequestTimes[playerNumber];
+
+        if(totalRequestAmount > 0) {
+            return totalRequestTime / totalRequestAmount;
         } else {
             return 0;
         }
     }
-
-    public void setAveragePingTime(int playerNumber, long averagePingTime) {
-        if(playerNumber < this.averagePingTime.length) {
-            this.averagePingTime[playerNumber] = averagePingTime;
-        }
-    }
-
 }

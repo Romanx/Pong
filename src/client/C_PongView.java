@@ -6,8 +6,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -30,6 +29,7 @@ class C_PongView extends JFrame implements Observer {
     GameObject[] bats;
     private float pingTime;
     private C_PongController pongController;
+    private PongWindowAdapter windowAdapter;
     private Dimension theAD;              // Alternate Dimension
     private BufferedImage theAI;              // Alternate Image
     private Graphics2D theAG;              // Alternate Graphics
@@ -38,6 +38,8 @@ class C_PongView extends JFrame implements Observer {
         setSize(W, H);                        // Size of window
         addKeyListener(new Transaction());    // Called when key press
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        windowAdapter = new PongWindowAdapter();
+        addWindowListener(windowAdapter);
     }
 
     /**
@@ -142,8 +144,8 @@ class C_PongView extends JFrame implements Observer {
      */
     public void setPongController(C_PongController aPongController) {
         pongController = aPongController;
+        windowAdapter.setPongController(aPongController);
     }
-
     /**
      * Methods Called on a key press
      * calls the controller to process key
@@ -166,5 +168,20 @@ class C_PongView extends JFrame implements Observer {
         }
 
 
+    }
+
+    class PongWindowAdapter extends WindowAdapter {
+        private C_PongController pongController;
+
+        public void setPongController(C_PongController pongController) {
+            this.pongController = pongController;
+        }
+
+        @Override
+        public void windowClosing(WindowEvent e) {
+            super.windowClosing(e);
+            DEBUG.trace("Closing the Window!");
+            pongController.closePlayer();
+        }
     }
 }

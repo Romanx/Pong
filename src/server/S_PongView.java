@@ -35,33 +35,27 @@ class S_PongView implements Observer {
         this.ball = model.getBall();
         this.bats = model.getBats();
         long playerOnePing, playerTwoPing;
-        playerOnePing = model.getAveragePingTime(0);
-        playerTwoPing = model.getAveragePingTime(1);
+        playerOnePing = model.getAverageRequestTime(0);
+        playerTwoPing = model.getAverageRequestTime(1);
 
         Object[] result = new Object[] { ball.getX(), ball.getY(), this.bats[0].getY(), this.bats[1].getY()};
 
         // Now need to send position of game objects to the client as the model on the server has changed
+        // If player two's request time is higher than player one.
         if(playerOnePing < playerTwoPing) {
+            long timeDiff = playerTwoPing - playerOnePing;
             right.put(new Object[] {result, model.getRequestTime(1)});
 
-            // Sleep for the time that the two clients are out of sync.
-            try {
-                if(playerTwoPing - playerOnePing > 0) Thread.sleep(playerTwoPing - playerOnePing);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            delayByMiliseconds(timeDiff);
 
             left.put(new Object[]{result, model.getRequestTime(0)});
             //DEBUG.trace("Player Ones Ping is Lower than Player Twos.");
         } else {
+            long timeDiff = playerOnePing - playerTwoPing;
             left.put(new Object[]{result, model.getRequestTime(0)});
 
-            // Sleep for the time that the two clients are out of sync.
-            try {
-                if(playerOnePing - playerTwoPing > 0) Thread.sleep(playerOnePing - playerTwoPing);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            delayByMiliseconds(timeDiff);
+
             right.put(new Object[] {result, model.getRequestTime(1)});
             //DEBUG.trace("Player Twos Ping is Lower than Player Ones.");
         }
@@ -69,6 +63,15 @@ class S_PongView implements Observer {
         //Remove the old request since we've told the client about it.
         model.setRequestTime(0, 0);
         model.setRequestTime(1, 0);
+    }
+
+    private void delayByMiliseconds(long timeDiff) {
+        // Sleep for the time that the two clients are out of sync.
+        try {
+            if(timeDiff > 0) Thread.sleep(timeDiff);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 

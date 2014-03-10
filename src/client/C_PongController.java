@@ -2,6 +2,7 @@ package client;
 import common.*;
 
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Random;
 
@@ -67,5 +68,8 @@ public class C_PongController
     public void setPlayer(Player p) { this.player = p; }
 
 
+    public void closePlayer() {
+        this.player.closeConnection();
+    }
 }
 

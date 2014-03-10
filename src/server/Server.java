@@ -161,8 +161,13 @@ class Player extends Thread {
 
             // To avoid just resetting it to the same value.
             GameObject bat = this.model.getBat(playerNumber);
+
+            //Calculate how long the request took to reach the server.
+            long timeDelay = System.currentTimeMillis() - timestamp;
+            this.model.addToTotalRequestTime(playerNumber, timeDelay);
+
             this.model.setRequestTime(this.playerNumber, timestamp);
-            this.model.setAveragePingTime(this.playerNumber, pingTime);
+            //this.model.setAveragePingTime(this.playerNumber, pingTime);
             bat.moveY(batY);
 
             this.model.modelChanged();

@@ -5,6 +5,7 @@ import common.GameObject;
 import common.NetObjectReader;
 import common.NetObjectWriter;
 
+import java.io.IOException;
 import java.net.Socket;
 import java.util.Date;
 import java.util.Scanner;
@@ -34,6 +35,14 @@ class Player extends Thread
 
     public NetObjectWriter getPlayerOutput() {
         return this.out;
+    }
+
+    public void closeConnection() {
+        try {
+            this.out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

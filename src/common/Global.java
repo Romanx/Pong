@@ -20,5 +20,8 @@ public class Global
   //  but should be user settable
   public static final int    PORT = 50001;       // Port
   public static final String HOST = "localhost"; // M/C Name
+
+
+  public static final String MULTIPLEX = "multiplex_mode";
 }
 

@@ -3,6 +3,7 @@ package server;
 import common.*;
 
 import java.io.IOException;
+import java.net.MulticastSocket;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Date;
@@ -21,24 +22,33 @@ class Server {
     private int NUM_PLAYERS = 0;
     private int threadNo = 0;
     private ServerSocket ss = null;
+    private static Boolean multiplexMode = false;
 
     public final static AtomicInteger ACTIVE_THREAD_COUNT = new AtomicInteger(0);
     private static int threadCount = 0;
 
-    public Server(int threadNo, ServerSocket socket) {
-        this.threadNo = threadNo;
-        this.ss = socket;
+    public static S_PongGame getTypedGame(int threadNo, ServerSocket ss) {
+        if(multiplexMode) {
+            return new S_TCPPongGame(threadNo, ss);
+        } else {
+            return new S_TCPPongGame(threadNo, ss);
+        }
     }
 
     public static void main(String args[]) {
         try {
+
+            if(args.length > 0 && args[0].equals(Global.MULTIPLEX)) {
+                multiplexMode = true;
+            }
+
             ServerSocket socket = new ServerSocket(Global.PORT);  // Server Socket
 
             while(true) {
                 //TODO: Remove the limit or adjust for a ThreadPool.
                 while(ACTIVE_THREAD_COUNT.get() < 3) {
                     ACTIVE_THREAD_COUNT.getAndIncrement();
-                    (new Server(threadCount++, socket)).start();
+                    (getTypedGame(threadCount++, socket)).start();
                 }
             }
 
@@ -48,62 +58,8 @@ class Server {
         }
     }
 
-    /**
-     * Start the server
-     */
-    public void start() {
-        DEBUG.set(true);
-        DEBUG.trace("Pong Server " + this.threadNo);
-        //DEBUG.set( false );               // Otherwise lots of debug info
-        S_PongModel model = new S_PongModel();
-
-        this.makeContactWithClients(model);
-
-        S_PongView view = new S_PongView(p0, p1);
-        S_PongController cont = new S_PongController(model, view);
-
-        model.addObserver(view);       // Add observer to the model
-        model.makeActiveObject();      // Start play
-    }
-
-    /**
-     * Make contact with the clients who wish to play
-     * Players will need to know about the model
-     *
-     * @param model Of the game
-     */
-    public void makeContactWithClients(S_PongModel model) {
-
-        try {
-            do {
-                Socket s = ss.accept();
-                Player p = new server.Player(NUM_PLAYERS, model, s);
-                NetObjectReader in = p.getPlayerInput();
-
-                DEBUG.trace("%s", "Connected!");
-
-                Object obj = in.get();
-                if (obj == null) break;
-                String message = (String) obj;
-
-                if (message.equals("Connect")) {
-                    if (p0 == null) {
-                        p0 = p.getPlayerOutput();
-                        DEBUG.trace("%s : %s", "Server " + threadNo, "Player One Connected");
-                    } else if (p1 == null) {
-                        p1 = p.getPlayerOutput();
-                        DEBUG.trace("Player Two Connected");
-                    }
-                    NUM_PLAYERS++;
-                    p.start();
-                }
-
-            } while (NUM_PLAYERS < 2);
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            DEBUG.error("%s : Location[Server.makeContactWithClients()]", ex.getMessage());
-        }
+    public Boolean getMultiplexMode() {
+        return multiplexMode;
     }
 }
 

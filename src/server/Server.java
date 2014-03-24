@@ -156,8 +156,6 @@ class Player extends Thread {
 
             double batY = (Double)result[0];
             long timestamp = (Long)result[1];
-            long pingTime = (Long)result[2];
-
 
             // To avoid just resetting it to the same value.
             GameObject bat = this.model.getBat(playerNumber);

@@ -57,9 +57,8 @@ public class C_PongController
         if(batMove != 0) {
             NetObjectWriter out = this.player.getPlayerOutput();
             long timestamp = System.currentTimeMillis();
-            long pingTime = model.getPingTime();
 
-            out.put(new Object[]{batMove, timestamp, pingTime});
+            out.put(new Object[]{batMove, timestamp});
         }
 
 

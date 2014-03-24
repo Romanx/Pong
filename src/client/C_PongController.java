@@ -58,7 +58,7 @@ public class C_PongController
             NetObjectWriter out = this.player.getPlayerOutput();
             long timestamp = System.currentTimeMillis();
 
-            out.put(new Object[]{batMove, timestamp});
+            out.put(new Object[]{"GameData", batMove, timestamp});
         }
 
 
@@ -68,7 +68,7 @@ public class C_PongController
 
 
     public void closePlayer() {
-        this.player.closeConnection();
+        if(this.player != null) this.player.closeConnection();
     }
 }
 

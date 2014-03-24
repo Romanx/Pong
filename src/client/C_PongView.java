@@ -181,7 +181,7 @@ class C_PongView extends JFrame implements Observer {
         public void windowClosing(WindowEvent e) {
             super.windowClosing(e);
             DEBUG.trace("Closing the Window!");
-            pongController.closePlayer();
+            if(pongController != null) pongController.closePlayer();
         }
     }
 }

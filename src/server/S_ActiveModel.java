@@ -27,7 +27,7 @@ class S_ActiveModel implements Runnable {
             GameObject ball = pongModel.getBall();
             GameObject bats[] = pongModel.getBats();
 
-            while (true) {
+            while (!pongModel.getShutdown()) {
                 double x = ball.getX();
                 double y = ball.getY();
                 // Deal with possible edge of board hit

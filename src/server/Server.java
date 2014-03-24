@@ -2,6 +2,7 @@ package server;
 
 import common.*;
 
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Date;
@@ -21,7 +22,8 @@ class Server {
     private int threadNo = 0;
     private ServerSocket ss = null;
 
-    private final static AtomicInteger threadCount = new AtomicInteger(0);
+    public final static AtomicInteger ACTIVE_THREAD_COUNT = new AtomicInteger(0);
+    private static int threadCount = 0;
 
     public Server(int threadNo, ServerSocket socket) {
         this.threadNo = threadNo;
@@ -31,12 +33,15 @@ class Server {
     public static void main(String args[]) {
         try {
             ServerSocket socket = new ServerSocket(Global.PORT);  // Server Socket
-            //  int threadNo = 0;
 
-            //TODO: Remove the limit or adjust for a ThreadPool.
-            while(threadCount.get() < 3) {
-                (new Server(threadCount.getAndIncrement(), socket)).start();
+            while(true) {
+                //TODO: Remove the limit or adjust for a ThreadPool.
+                while(ACTIVE_THREAD_COUNT.get() < 3) {
+                    ACTIVE_THREAD_COUNT.getAndIncrement();
+                    (new Server(threadCount++, socket)).start();
+                }
             }
+
         } catch(Exception ex) {
             ex.printStackTrace();
             DEBUG.error("%s : Location[Server.main()]", ex.getMessage());
@@ -59,8 +64,6 @@ class Server {
 
         model.addObserver(view);       // Add observer to the model
         model.makeActiveObject();      // Start play
-
-        threadCount.decrementAndGet();
     }
 
     /**
@@ -149,26 +152,34 @@ class Player extends Thread {
 
         out.put("Connected");
 
-        while (true) {
+        while (!model.getShutdown()) {
             Object obj = in.get();
             if (obj == null) return;
             Object[] result = (Object[])obj;
 
-            double batY = (Double)result[0];
-            long timestamp = (Long)result[1];
+            String commandType = (String)result[0];
 
-            // To avoid just resetting it to the same value.
-            GameObject bat = this.model.getBat(playerNumber);
+            if(commandType.equals("GameData")) {
+                double batY = (Double)result[1];
+                long timestamp = (Long)result[2];
 
-            //Calculate how long the request took to reach the server.
-            long timeDelay = System.currentTimeMillis() - timestamp;
-            this.model.addToTotalRequestTime(playerNumber, timeDelay);
+                // To avoid just resetting it to the same value.
+                GameObject bat = this.model.getBat(playerNumber);
 
-            this.model.setRequestTime(this.playerNumber, timestamp);
-            //this.model.setAveragePingTime(this.playerNumber, pingTime);
-            bat.moveY(batY);
+                //Calculate how long the request took to reach the server.
+                long timeDelay = System.currentTimeMillis() - timestamp;
+                this.model.addToTotalRequestTime(playerNumber, timeDelay);
 
-            this.model.modelChanged();
+                this.model.setRequestTime(this.playerNumber, timestamp);
+                //this.model.setAveragePingTime(this.playerNumber, pingTime);
+                bat.moveY(batY);
+
+                this.model.modelChanged();
+            }
+            else if(commandType.equals("CloseConnection")) {
+                model.setShutdown(true);
+                Server.ACTIVE_THREAD_COUNT.getAndDecrement();
+            }
         }
     }
 

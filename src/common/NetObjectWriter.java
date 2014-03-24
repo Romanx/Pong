@@ -9,8 +9,11 @@ import java.net.Socket;
  */
 
 public class NetObjectWriter extends ObjectOutputStream {
+    Socket s;
+
     public NetObjectWriter(Socket s) throws IOException {
         super(s.getOutputStream());
+        this.s = s;
         s.setTcpNoDelay(true);       // Send data immediately
     }
 
@@ -22,6 +25,7 @@ public class NetObjectWriter extends ObjectOutputStream {
             flush();                   // Flush
             return true;               // Ok
         } catch (IOException err) {
+            err.printStackTrace();
             DEBUG.error("NetObjectWriter.get %s",
                     err.getMessage());
             return false;                           // Failed write

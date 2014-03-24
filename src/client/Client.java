@@ -5,6 +5,8 @@ import common.Global;
 import common.NetObjectReader;
 import common.NetObjectWriter;
 
+import javax.sql.ConnectionEvent;
+import java.net.ConnectException;
 import java.net.Socket;
 
 /**
@@ -47,12 +49,20 @@ class Client
             // Also starts the Player task that get the current state of the game from the server
             Socket s = new Socket(Global.HOST, Global.PORT);
 
-            DEBUG.trace("Trying to Connect.");
-            Player p = new Player(model, s);
-            cont.setPlayer(p);
-            p.start();
+            if(s.isConnected()) {
 
-        } catch (Exception ex) {
+                DEBUG.trace("Trying to Connect.");
+                Player p = new Player(model, s);
+                cont.setPlayer(p);
+                p.start();
+
+            }
+
+        }
+        catch (ConnectException ex) {
+            DEBUG.trace("%s  : Location[Client.makeContactWithServer()]", "The Server does not seem to be running.");
+        }
+        catch (Exception ex) {
             ex.printStackTrace();
             DEBUG.error("%s : Location[Client.makeContactWithServer()]", ex.getMessage());
         }

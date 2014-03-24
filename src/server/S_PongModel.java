@@ -19,6 +19,8 @@ public class S_PongModel extends Observable {
 
     private Thread activeModel;
 
+    private boolean shutdown;
+
     public S_PongModel() {
         bats[0] = new GameObject(60, H / 2, BAT_WIDTH, BAT_HEIGHT);
         bats[1] = new GameObject(W - 60, H / 2, BAT_WIDTH, BAT_HEIGHT);
@@ -117,5 +119,13 @@ public class S_PongModel extends Observable {
         } else {
             return 0;
         }
+    }
+
+    public boolean getShutdown() {
+        return this.shutdown;
+    }
+
+    public void setShutdown(boolean shutdown) {
+        this.shutdown = shutdown;
     }
 }

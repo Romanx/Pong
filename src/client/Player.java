@@ -38,11 +38,7 @@ class Player extends Thread
     }
 
     public void closeConnection() {
-        try {
-            this.out.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.out.put(new Object[] {"CloseConnection"});
     }
 
     /**

@@ -22,6 +22,7 @@ public class NetObjectReader extends ObjectInputStream
     }
     catch ( Exception err )                  // Reading error
     {
+        err.printStackTrace();
       DEBUG.error("NetObjectReader.get %s", 
                    err.getMessage() );
       return null;                           //  On error return null

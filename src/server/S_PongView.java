@@ -17,7 +17,6 @@ class S_PongView implements Observer {
     private GameObject ball;
     private GameObject[] bats;
     private NetObjectWriter left, right;
-    private Random r = new Random();
 
     public S_PongView(NetObjectWriter c1, NetObjectWriter c2) {
         this.left = c1;

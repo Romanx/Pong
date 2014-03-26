@@ -19,6 +19,7 @@ public class Global
   // Of course this should not be a constant
   //  but should be user settable
   public static final int    PORT = 50001;       // Port
+  public static final int    MULTIPLEX_PORT = 50002;
   public static final String HOST = "localhost"; // M/C Name
 
 

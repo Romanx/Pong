@@ -1,8 +1,9 @@
-package server;
+package server.Games;
 
 import common.DEBUG;
 import common.NetObjectReader;
 import common.NetObjectWriter;
+import server.*;
 
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -14,11 +15,11 @@ public class S_TCPPongGame extends S_PongGame {
         super(threadNo, socket);
     }
 
-    @Override
     /**
      * A concrete method defining how a TCP Pong Game connects to its client.
      * @param model
      */
+    @Override
     public void makeContactWithClients(S_PongModel model) {
         try {
             do {
@@ -38,7 +39,7 @@ public class S_TCPPongGame extends S_PongGame {
                         DEBUG.trace("%s : %s", "Server " + threadNo, "Player One Connected");
                     } else if (p1 == null) {
                         p1 = p.getPlayerOutput();
-                        DEBUG.trace("Player Two Connected");
+                        DEBUG.trace("%s : %s", "Server " + threadNo, "Player Two Connected");
                     }
                     numPlayers++;
                     p.start();
@@ -65,7 +66,7 @@ public class S_TCPPongGame extends S_PongGame {
 
         this.makeContactWithClients(model);
 
-        S_PongView view = new S_PongView(p0, p1);
+        S_PongView view = new S_TCPPongView(p0, p1);
         S_PongController cont = new S_PongController(model, view);
 
         model.addObserver(view);       // Add observer to the model

@@ -1,9 +1,8 @@
-package server.Games;
+package server.Game;
 
 import server.S_PongModel;
 
 import java.net.ServerSocket;
-import java.net.Socket;
 
 /**
  * Created by Alex on 24/03/2014.

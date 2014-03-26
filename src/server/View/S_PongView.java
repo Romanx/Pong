@@ -1,4 +1,4 @@
-package server;
+package server.View;
 
 import common.DEBUG;
 import common.GameObject;

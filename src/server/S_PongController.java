@@ -1,5 +1,7 @@
 package server;
 
+import server.View.S_PongView;
+
 /**
  * Pong controller
  * Not used currently.

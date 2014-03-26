@@ -1,7 +1,8 @@
-package server;
+package server.View;
 
 import common.GameObject;
 import common.Global;
+import server.S_PongModel;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

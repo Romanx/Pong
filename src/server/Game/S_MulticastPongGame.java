@@ -1,24 +1,26 @@
-package server.Games;
+package server.Game;
 
 import common.DEBUG;
 import common.NetObjectReader;
 import common.NetObjectWriter;
 import server.*;
+import server.View.S_MulticastPongView;
+import server.View.S_PongView;
 
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 
-public class S_TCPPongGame extends S_PongGame {
+/**
+ * Created by Alex on 26/03/2014.
+ */
+public class S_MulticastPongGame extends S_PongGame {
     private NetObjectWriter p0, p1 = null;
 
-    public S_TCPPongGame(int threadNo, ServerSocket socket) {
+    public S_MulticastPongGame(int threadNo, ServerSocket socket) {
         super(threadNo, socket);
     }
 
-    /**
-     * A concrete method defining how a TCP Pong Game connects to its client.
-     * @param model
-     */
     @Override
     public void makeContactWithClients(S_PongModel model) {
         try {
@@ -54,19 +56,21 @@ public class S_TCPPongGame extends S_PongGame {
     }
 
     @Override
-    /**
-     * The run method for a TCP Pong Game which is passed in the thread pool.
-     */
     public void start() {
         DEBUG.set(true);
-        DEBUG.trace("Pong Server " + this.threadNo);
+        DEBUG.trace("Multicast Pong Server " + this.threadNo);
 
         //DEBUG.set( false );               // Otherwise lots of debug info
         S_PongModel model = new S_PongModel();
 
         this.makeContactWithClients(model);
 
-        S_PongView view = new S_TCPPongView(p0, p1);
+        S_PongView view = null;
+        try {
+            view = new S_MulticastPongView(this.threadNo);
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
         S_PongController cont = new S_PongController(model, view);
 
         model.addObserver(view);       // Add observer to the model

@@ -1,7 +1,8 @@
-package server;
+package server.View;
 
 import common.GameObject;
 import common.NetObjectWriter;
+import server.S_PongModel;
 
 import java.util.Observable;
 

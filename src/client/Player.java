@@ -66,49 +66,13 @@ class Player extends Thread
 
             Object obj = in.get();
             if (obj != null) {
-                String message = (String) obj;
-                DEBUG.trace("RESULT: %s", message);
+                String[] message = (String[]) obj;
+                DEBUG.trace("RESULT: %s", message[0]);
 
-                if (message.equals("Connected")) {
-                    while (true) {
-                        obj = in.get();
-                        if (obj != null) {
-                            double ballX, ballY, batZeroY, batOneY;
-                            long timestamp;
-
-                            // Pull the data from the serialised message. Currently in two sections,
-                            // Object array of GameObject data and the last request time.
-                            Object[] result = (Object[])obj;
-                            Object[] gameObjects = (Object[])result[0];
-
-                            //Define variable here rather than pulling out of the array twice.
-                            timestamp = (Long)result[1];
-
-                            // Only update the timestamp if we've sent a request since last update.
-                            if(timestamp > 0) {
-                                model.addRequestTimestamp(System.currentTimeMillis() - timestamp);
-                            }
-
-                            // Assignments with casting to the correct types. Since they're stored as Objects i have to cast
-                            // them to Boxed primative types.
-                            ballX = (Double)gameObjects[0];
-                            ballY = (Double)gameObjects[1];
-                            batZeroY = (Double)gameObjects[2];
-                            batOneY = (Double)gameObjects[3];
-                            GameObject ball = model.getBall();
-                            GameObject[] bats = model.getBats();
-
-                            ball.setX(ballX);
-                            ball.setY(ballY);
-                            bats[0].setY(batZeroY);
-                            bats[1].setY(batOneY);
-
-                            //Notify Model has Changed.
-                            model.modelChanged();
-                        }
-                    }
+                if(message[0].equals("Connected")) {
+                    this.processTCPResponses();
                 } else {
-                    DEBUG.trace(message);
+                    this.processMultiplexResponses();
                 }
             }
 
@@ -116,5 +80,50 @@ class Player extends Thread
             ex.printStackTrace();
             DEBUG.error("Exception player.constructor : Client - " + ex.getMessage());
         }
+    }
+
+    public void processTCPResponses() {
+        Object obj;
+        while (true) {
+            obj = in.get();
+            if (obj != null) {
+                double ballX, ballY, batZeroY, batOneY;
+                long timestamp;
+
+                // Pull the data from the serialised message. Currently in two sections,
+                // Object array of GameObject data and the last request time.
+                Object[] result = (Object[])obj;
+                Object[] gameObjects = (Object[])result[0];
+
+                //Define variable here rather than pulling out of the array twice.
+                timestamp = (Long)result[1];
+
+                // Only update the timestamp if we've sent a request since last update.
+                if(timestamp > 0) {
+                    model.addRequestTimestamp(System.currentTimeMillis() - timestamp);
+                }
+
+                // Assignments with casting to the correct types. Since they're stored as Objects i have to cast
+                // them to Boxed primative types.
+                ballX = (Double)gameObjects[0];
+                ballY = (Double)gameObjects[1];
+                batZeroY = (Double)gameObjects[2];
+                batOneY = (Double)gameObjects[3];
+                GameObject ball = model.getBall();
+                GameObject[] bats = model.getBats();
+
+                ball.setX(ballX);
+                ball.setY(ballY);
+                bats[0].setY(batZeroY);
+                bats[1].setY(batOneY);
+
+                //Notify Model has Changed.
+                model.modelChanged();
+            }
+        }
+    }
+
+    public void processMultiplexResponses() {
+
     }
 }

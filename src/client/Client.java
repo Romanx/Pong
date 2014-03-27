@@ -55,7 +55,6 @@ class Client
                 Player p = new Player(model, s);
                 cont.setPlayer(p);
                 p.start();
-
             }
 
         }

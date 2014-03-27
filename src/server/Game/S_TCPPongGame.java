@@ -26,7 +26,7 @@ public class S_TCPPongGame extends S_PongGame {
         try {
             do {
                 Socket s = ss.accept();
-                Player p = new server.Player(numPlayers, model, s);
+                Player p = new server.Player(numPlayers, model, s, false);
                 NetObjectReader in = p.getPlayerInput();
 
                 DEBUG.trace("%s", "Connected!");
@@ -65,6 +65,7 @@ public class S_TCPPongGame extends S_PongGame {
 
         //DEBUG.set( false );               // Otherwise lots of debug info
         S_PongModel model = new S_PongModel();
+        model.setGameNumber(threadNo);
 
         this.makeContactWithClients(model);
 

@@ -12,6 +12,7 @@ import java.net.Socket;
  * updates to the model when a player moves there bat
  */
 public class Player extends Thread {
+    private final Boolean isMultiplex;
     private S_PongModel model;
     private int playerNumber;
     private Socket socket;
@@ -26,10 +27,11 @@ public class Player extends Thread {
      * @param model  Model of the game
      * @param s      Socket used to communicate the players bat move
      */
-    public Player(int player, S_PongModel model, Socket s) {
+    public Player(int player, S_PongModel model, Socket s, Boolean isMultiplex) {
         this.model = model;
         this.playerNumber = player;
         this.socket = s;
+        this.isMultiplex = isMultiplex;
 
         try {
             in = new NetObjectReader(socket);
@@ -50,7 +52,7 @@ public class Player extends Thread {
         DEBUG.trace("player.run : Server");
         DEBUG.trace("Socket: " + socket.getInetAddress() + ", " + socket.getPort());
 
-        out.put("Connected");
+        out.put(new Object[] { "Connected", isMultiplex, model.getGameNumber() });
 
         while (!model.getShutdown()) {
             Object obj = in.get();

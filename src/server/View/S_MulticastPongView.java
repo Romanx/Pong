@@ -37,7 +37,7 @@ public class S_MulticastPongView extends S_PongView {
         DatagramPacket packet;
 
         try {
-            group = InetAddress.getByName(Global.HOST);
+            group = InetAddress.getByName(Global.MCA);
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }

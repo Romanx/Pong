@@ -21,6 +21,7 @@ public class Global
   public static final int    PORT = 50001;       // Port
   public static final int    MULTIPLEX_PORT = 50002;
   public static final String HOST = "localhost"; // M/C Name
+  public static final String MCA = "224.0.0.7";
 
 
   public static final String MULTIPLEX = "multiplex_mode";

@@ -1,11 +1,13 @@
 package client;
 
-import common.DEBUG;
-import common.GameObject;
-import common.NetObjectReader;
-import common.NetObjectWriter;
+import common.*;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.net.DatagramPacket;
+import java.net.InetAddress;
+import java.net.MulticastSocket;
 import java.net.Socket;
 import java.util.Date;
 import java.util.Scanner;
@@ -66,13 +68,19 @@ class Player extends Thread
 
             Object obj = in.get();
             if (obj != null) {
-                String[] message = (String[]) obj;
-                DEBUG.trace("RESULT: %s", message[0]);
+                Object[] messages = (Object[]) obj;
+                DEBUG.trace("RESULT: %s", messages[0]);
 
-                if(message[0].equals("Connected")) {
-                    this.processTCPResponses();
-                } else {
-                    this.processMultiplexResponses();
+                String response = (String)messages[0];
+                Boolean isMultiplex = (Boolean)messages[1];
+                int gameNumber = (Integer)messages[2];
+
+                if(response.equals("Connected")) {
+                    if(isMultiplex) {
+                        this.processMultiplexResponses(gameNumber);
+                    } else {
+                        this.processTCPResponses();
+                    }
                 }
             }
 
@@ -123,7 +131,50 @@ class Player extends Thread
         }
     }
 
-    public void processMultiplexResponses() {
+    public void processMultiplexResponses(int gameNumber) {
+        try {
+            MulticastSocket socket = new MulticastSocket(Global.MULTIPLEX_PORT);
+            InetAddress group = InetAddress.getByName(Global.MCA);
+            socket.joinGroup(group);
 
+            byte[] b = new byte[65535];
+            ByteArrayInputStream b_in = new ByteArrayInputStream(b);
+            DatagramPacket dgram = new DatagramPacket(b, b.length);
+            double ballX, ballY, batZeroY, batOneY;
+
+            while(true) {
+                socket.receive(dgram);
+
+                ObjectInputStream o_in = new ObjectInputStream(b_in);
+                Object o = o_in.readObject();
+
+                Object[] obj = (Object[])o;
+
+                Integer recievedGameNo = (Integer)obj[0];
+
+                if(recievedGameNo == gameNumber) {
+                    ballX = (Double)obj[1];
+                    ballY = (Double)obj[2];
+                    batZeroY = (Double)obj[3];
+                    batOneY = (Double)obj[4];
+                    GameObject ball = model.getBall();
+                    GameObject[] bats = model.getBats();
+
+                    ball.setX(ballX);
+                    ball.setY(ballY);
+                    bats[0].setY(batZeroY);
+                    bats[1].setY(batOneY);
+
+                    //Notify Model has Changed.
+                    model.modelChanged();
+                }
+
+                dgram.setLength(b.length); // must reset length field!
+                b_in.reset(); // reset so next read is from start of byte[] again
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

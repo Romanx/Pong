@@ -54,7 +54,7 @@ public class C_PongController
                 break;
         }
 
-        if(batMove != 0) {
+        if(!model.isSpectator() && batMove != 0) {
             NetObjectWriter out = this.player.getPlayerOutput();
             long timestamp = System.currentTimeMillis();
 

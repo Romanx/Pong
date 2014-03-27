@@ -16,6 +16,7 @@ public class C_PongModel extends Observable {
     private GameObject bats[] = new GameObject[2];
     private int numOfRequests = 0;
     private long totalRequestTime;
+    private boolean isSpectator;
 
     public C_PongModel() {
         bats[0] = new GameObject(60, H / 2, BAT_WIDTH, BAT_HEIGHT);
@@ -77,5 +78,13 @@ public class C_PongModel extends Observable {
     public void addRequestTimestamp(long timeTaken) {
         this.numOfRequests++;
         this.totalRequestTime += timeTaken;
+    }
+
+    public boolean isSpectator() {
+        return isSpectator;
+    }
+
+    public void setSpectator(boolean isSpectator) {
+        this.isSpectator = isSpectator;
     }
 }

@@ -25,6 +25,7 @@ import static common.Global.*;
  */
 class C_PongView extends JFrame implements Observer {
     private static final long serialVersionUID = 1L;
+    private boolean playerSpectating;
     GameObject ball;
     GameObject[] bats;
     private float pingTime;
@@ -53,6 +54,7 @@ class C_PongView extends JFrame implements Observer {
         ball = model.getBall();
         bats = model.getBats();
         pingTime = model.getPingTime();
+        playerSpectating = model.isSpectator();
         DEBUG.trace("C_PongView.update");
         repaint();                              // Re draw game
     }
@@ -126,6 +128,9 @@ class C_PongView extends JFrame implements Observer {
                 bats[1].getX(), bats[1].getY(),
                 pingTime);
         g.drawString(text, W / 2 - fm.stringWidth(text) / 2, (int) M * 2);
+
+        //If spectating draw spectating string.
+        if(playerSpectating) g.drawString("SPECTATING", W / 2 - fm.stringWidth("SPECTATING") / 2, (int) (H - M));
 
         // The ball at the current x, y position (width, height)
 

@@ -1,9 +1,6 @@
 package server;
 
-import common.DEBUG;
-import common.GameObject;
-import common.NetObjectReader;
-import common.NetObjectWriter;
+import common.*;
 
 import java.net.Socket;
 
@@ -74,7 +71,12 @@ public class Player extends Thread {
 
                 this.model.setRequestTime(this.playerNumber, timestamp);
 
-                bat.moveY(batY);
+                double newPos = bat.getY() + batY;
+
+                if(newPos < Global.H - Global.B - Global.BAT_HEIGHT &&
+                   newPos > 0 + Global.M) {
+                    bat.moveY(batY);
+                }
 
                 this.model.modelChanged();
             }

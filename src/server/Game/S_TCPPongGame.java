@@ -10,6 +10,15 @@ import server.View.S_TCPPongView;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+
+/**
+ * Created by Alex on 26/03/2014.
+ *
+ * This is a subclass of the PongGame defining how a TCP/IP game makes
+ * contact with a client and starts a TCP/IP PongView and a player class
+ * with multicast set to false.
+ *
+ */
 public class S_TCPPongGame extends S_PongGame {
     private NetObjectWriter p0, p1 = null;
 
@@ -57,7 +66,7 @@ public class S_TCPPongGame extends S_PongGame {
 
     @Override
     /**
-     * The run method for a TCP Pong Game which is passed in the thread pool.
+     * The run method for a TCP Pong Game which is passed into the servers game threads.
      */
     public void start() {
         DEBUG.set(true);

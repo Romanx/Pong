@@ -27,7 +27,7 @@ class C_PongView extends JFrame implements Observer {
     private static final long serialVersionUID = 1L;
     GameObject ball;
     GameObject[] bats;
-    private float pingTime;
+    private long pingTime;
     private C_PongController pongController;
     private PongWindowAdapter windowAdapter;
     private Dimension theAD;              // Alternate Dimension
@@ -120,7 +120,7 @@ class C_PongView extends JFrame implements Observer {
         g.setPaint(Color.blue);
         FontMetrics fm = getFontMetrics(font);
         String fmt = "Pong - Ball [%3.0f, %3.0f] Bat [%3.0f, %3.0f]" +
-                " Bat [%3.0f, %3.0f] | Ping %3.0f";
+                " Bat [%3.0f, %3.0f] | Ping [%03d]";
         String text = String.format(fmt, ball.getX(), ball.getY(),
                 bats[0].getX(), bats[0].getY(),
                 bats[1].getX(), bats[1].getY(),

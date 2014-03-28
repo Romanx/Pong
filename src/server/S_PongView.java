@@ -4,9 +4,7 @@ import common.DEBUG;
 import common.GameObject;
 import common.NetObjectWriter;
 
-import java.util.Observable;
-import java.util.Observer;
-import java.util.Random;
+import java.util.*;
 
 
 /**
@@ -17,10 +15,14 @@ class S_PongView implements Observer {
     private GameObject ball;
     private GameObject[] bats;
     private NetObjectWriter left, right;
+    private Timer timer;
+    private Random r = new Random();
 
     public S_PongView(NetObjectWriter c1, NetObjectWriter c2) {
         this.left = c1;
         this.right = c2;
+
+        timer = new Timer();
     }
 
     /**
@@ -45,18 +47,14 @@ class S_PongView implements Observer {
             long timeDiff = playerTwoPing - playerOnePing;
             right.put(new Object[] {result, model.getRequestTime(1)});
 
-            delayByMiliseconds(timeDiff);
-
-            left.put(new Object[]{result, model.getRequestTime(0)});
-            //DEBUG.trace("Player Ones Ping is Lower than Player Twos.");
+            timer.schedule(new PongResponseTask(new Object[]{result, model.getRequestTime(0)}, left), timeDiff);
+            DEBUG.trace("Player Ones Ping is Lower than Player Twos.");
         } else {
             long timeDiff = playerOnePing - playerTwoPing;
             left.put(new Object[]{result, model.getRequestTime(0)});
 
-            delayByMiliseconds(timeDiff);
-
-            right.put(new Object[] {result, model.getRequestTime(1)});
-            //DEBUG.trace("Player Twos Ping is Lower than Player Ones.");
+            timer.schedule(new PongResponseTask(new Object[]{result, model.getRequestTime(1)}, right), timeDiff);
+            DEBUG.trace("Player Twos Ping is Lower than Player Ones.");
         }
 
         //Remove the old request since we've told the client about it.
@@ -64,14 +62,21 @@ class S_PongView implements Observer {
         model.setRequestTime(1, 0);
     }
 
-    private void delayByMiliseconds(long timeDiff) {
-        // Sleep for the time that the two clients are out of sync.
-        try {
-            if(timeDiff > 0) Thread.sleep(timeDiff);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    /**
+     * A task to send the response to a given output after a
+     */
+    private class PongResponseTask extends TimerTask {
+        private final Object[] data;
+        private final NetObjectWriter output;
+
+        public PongResponseTask(final Object[] dataToSend, final NetObjectWriter out) {
+            this.data = dataToSend;
+            this.output = out;
+        }
+
+        @Override
+        public void run() {
+            output.put(data);
         }
     }
-
-
 }

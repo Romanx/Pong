@@ -6,6 +6,9 @@ import java.net.ServerSocket;
 
 /**
  * Created by Alex on 24/03/2014.
+ *
+ * An abstract class defining what methods a Pong_Game needs to allow an abstraction
+ * between TCP/IP and Multicast.
  */
 public abstract class S_PongGame {
     protected ServerSocket ss;

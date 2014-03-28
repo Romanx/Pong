@@ -12,6 +12,9 @@ import java.util.Observable;
 
 /**
  * Created by Alex on 26/03/2014.
+ *
+ * This is a Multicast extension of the PongView defining how a Multicast server
+ * handles an update to the model and sening it back to the client.
  */
 public class S_MulticastPongView extends S_PongView {
     private GameObject ball;
@@ -19,6 +22,12 @@ public class S_MulticastPongView extends S_PongView {
     private DatagramSocket socket;
     private int threadNo;
 
+    /**
+     * A simple constructor that creates a DatagramSocket and sets
+     * the threadNumber to send that data for.
+     * @param threadNo of the activeGame.
+     * @throws SocketException
+     */
     public S_MulticastPongView(int threadNo) throws SocketException {
         super();
         socket = new DatagramSocket();
@@ -26,6 +35,11 @@ public class S_MulticastPongView extends S_PongView {
     }
 
     @Override
+    /**
+     * Called by the observable model when a change is made, this sends
+     * bat and ball details to all the people listening to the
+     * multicast socket.
+     */
     public void update(Observable aPongModel, Object arg) {
         S_PongModel model = (S_PongModel) aPongModel;
 

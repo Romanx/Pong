@@ -18,8 +18,9 @@ class S_ActiveModel implements Runnable {
     }
 
     /**
-     * Code to position the ball after time interval
-     * runs as a separate thread
+     * Code to position the ball after time interval runs as a
+     * separate thread. If the game is shutdown then the loop ends and
+     * the thread closes.
      */
     public void run() {
         final double S = 1;           // Units to move

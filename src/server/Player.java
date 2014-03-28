@@ -23,6 +23,7 @@ public class Player extends Thread {
      * @param player Player 0 or 1
      * @param model  Model of the game
      * @param s      Socket used to communicate the players bat move
+     * @param isMultiplex Defines if the players is connected to a Multiplex game.
      */
     public Player(int player, S_PongModel model, Socket s, Boolean isMultiplex) {
         this.model = model;
@@ -42,7 +43,12 @@ public class Player extends Thread {
 
 
     /**
-     * Get and update the model with the latest bat movement
+     * Get and update the model with the latest bat movement.
+     *
+     * This sends the game connection information to the client and
+     * then listens for new requests. If it's GameData then the data
+     * is updated and sent back to the client, if it's a CloseConnection
+     * command then the connection is shutdown.
      */
     public void run()                             // Execution
     {

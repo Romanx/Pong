@@ -7,9 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import server.Game.*;
 
 /**
- * Start the game server
- * The call to makeActiveObject() in the model
- * starts the play of the game
+ * Start the game server. The call to makeActiveObject() in the model starts the play of the game.
  */
 class Server {
     private static Boolean multiplexMode = false;
@@ -17,6 +15,13 @@ class Server {
     public final static AtomicInteger ACTIVE_THREAD_COUNT = new AtomicInteger(0);
     private static int threadCount = 0;
 
+    /**
+     * Returns the correct gameType depending on if the server is a multiplexed server or not.
+     *
+     * @param threadNo the threadNumber.
+     * @param ss the server socket.
+     * @return a typed game depending on if the game is Multiplexed or not.
+     */
     public static S_PongGame getTypedGame(int threadNo, ServerSocket ss) {
         if(multiplexMode) {
             return new S_MulticastPongGame(threadNo, ss);
@@ -28,6 +33,7 @@ class Server {
     public static void main(String args[]) {
         try {
 
+            //Determines if it's a Multiplex server or not.
             if(args.length > 0 && args[0].equals(Global.MULTIPLEX)) {
                 multiplexMode = true;
             }
@@ -46,10 +52,6 @@ class Server {
             ex.printStackTrace();
             DEBUG.error("%s : Location[Server.main()]", ex.getMessage());
         }
-    }
-
-    public Boolean getMultiplexMode() {
-        return multiplexMode;
     }
 }
 

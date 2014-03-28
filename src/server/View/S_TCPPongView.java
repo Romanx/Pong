@@ -16,7 +16,6 @@ public class S_TCPPongView extends S_PongView {
     private GameObject[] bats;
     private NetObjectWriter left, right;
     private Timer timer;
-    private Random r = new Random();
 
     public S_TCPPongView(NetObjectWriter c1, NetObjectWriter c2) {
         this.left = c1;

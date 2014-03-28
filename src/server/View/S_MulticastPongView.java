@@ -16,8 +16,8 @@ import java.util.Observable;
 public class S_MulticastPongView extends S_PongView {
     private GameObject ball;
     private GameObject[] bats;
-    DatagramSocket socket;
-    int threadNo;
+    private DatagramSocket socket;
+    private int threadNo;
 
     public S_MulticastPongView(int threadNo) throws SocketException {
         super();

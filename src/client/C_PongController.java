@@ -49,8 +49,10 @@ public class C_PongController
                 break;
             case -KeyEvent.VK_UP:          // Up arrow
                 // Send to server
+                batMove = -Global.BAT_MOVE;
                 break;
             case -KeyEvent.VK_DOWN:        // Down arrow
+                batMove = +Global.BAT_MOVE;
                 break;
         }
 

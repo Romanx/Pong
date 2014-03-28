@@ -27,7 +27,7 @@ class Client
      */
     public void start() {
         DEBUG.trace("Pong Client");
-        DEBUG.set( false );
+        DEBUG.set( true );
         C_PongModel model = new C_PongModel();
         C_PongView view = new C_PongView();
         C_PongController cont = new C_PongController(model, view);

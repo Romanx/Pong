@@ -10,6 +10,11 @@ import java.util.*;
 
 /**
  * Created by Alex on 26/03/2014.
+ * This class defines how a TCP/IP replies to the
+ * clients with the new data.
+ *
+ * @author Alex McAuliffe
+ *
  */
 public class S_TCPPongView extends S_PongView {
     private GameObject ball;
@@ -60,22 +65,6 @@ public class S_TCPPongView extends S_PongView {
         model.setRequestTime(0, 0);
         model.setRequestTime(1, 0);
     }
-
-    /**
-     * A task to send the response to a given output after a
-     */
-    private class PongResponseTask extends TimerTask {
-        private final Object[] data;
-        private final NetObjectWriter output;
-
-        public PongResponseTask(final Object[] dataToSend, final NetObjectWriter out) {
-            this.data = dataToSend;
-            this.output = out;
-        }
-
-        @Override
-        public void run() {
-            output.put(data);
-        }
-    }
 }
+
+

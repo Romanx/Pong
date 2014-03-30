@@ -175,6 +175,8 @@ class Player extends Thread
 
         } catch (Exception e) {
             e.printStackTrace();
+            DEBUG.error("Exception Player.processMultiplexReponse : Client - " + e.getMessage());
+
         }
     }
 }

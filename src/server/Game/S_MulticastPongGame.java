@@ -25,12 +25,12 @@ public class S_MulticastPongGame extends S_PongGame {
         super(threadNo, socket);
     }
 
-    @Override
     /**
      * This is a Multicast version of makeContactWithClients.
      * This tells the player class to tell the player it's a multicast game.
-     *
+     * @param model the model to update.
      */
+    @Override
     public void makeContactWithClients(S_PongModel model) {
         try {
             do {
@@ -64,11 +64,11 @@ public class S_MulticastPongGame extends S_PongGame {
         }
     }
 
-    @Override
     /**
      * This defines the MulticastPongView used by the server and
      * sets the game number for the game.
      */
+    @Override
     public void start() {
         DEBUG.set(true);
         DEBUG.trace("Multicast Pong Server " + this.threadNo);

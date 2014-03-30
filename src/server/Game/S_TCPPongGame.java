@@ -28,7 +28,7 @@ public class S_TCPPongGame extends S_PongGame {
 
     /**
      * A concrete method defining how a TCP Pong Game connects to its client.
-     * @param model
+     * @param model to update the data on.
      */
     @Override
     public void makeContactWithClients(S_PongModel model) {

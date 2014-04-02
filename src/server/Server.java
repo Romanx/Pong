@@ -35,7 +35,6 @@ class Server {
 
     public static void main(String args[]) {
         try {
-
             //Determines if it's a Multiplex server or not.
             if (args.length > 0 && args[0].equals(Global.MULTIPLEX)) {
                 multiplexMode = true;

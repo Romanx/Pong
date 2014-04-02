@@ -74,8 +74,8 @@ public class S_MulticastPongGame extends S_PongGame {
     public void start() {
         DEBUG.set(true);
         DEBUG.trace("Multicast Pong Server " + this.threadNo);
+        DEBUG.set( false );               // Otherwise lots of debug info
 
-        //DEBUG.set( false );               // Otherwise lots of debug info
         S_PongModel model = new S_PongModel();
         model.setGameNumber(threadNo);
 

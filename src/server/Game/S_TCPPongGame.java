@@ -73,8 +73,8 @@ public class S_TCPPongGame extends S_PongGame {
     public void start() {
         DEBUG.set(true);
         DEBUG.trace("Pong Server " + this.threadNo);
+        DEBUG.set( false );               // Otherwise lots of debug info
 
-        //DEBUG.set( false );               // Otherwise lots of debug info
         S_PongModel model = new S_PongModel();
         model.setGameNumber(threadNo);
 

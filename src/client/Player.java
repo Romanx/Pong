@@ -3,20 +3,17 @@ package client;
 import common.*;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.Socket;
-import java.util.Date;
-import java.util.Scanner;
 
 /**
  * Individual player run as a separate thread to allow
  * updates immediately the bat is moved
  */
-class Player extends Thread
+public class Player extends Thread
 {
     private C_PongModel model;
     private Socket socket;
@@ -35,10 +32,17 @@ class Player extends Thread
         // The player needs to know this to be able to work
     }
 
+    /**
+     * Returns the players NetObjectWriter to avoid the issue with creating more than one.
+     * @return the players NetObjectWriter
+     */
     public NetObjectWriter getPlayerOutput() {
         return this.out;
     }
 
+    /**
+     * Sends the close connection command to the server.
+     */
     public void closeConnection() {
         this.out.put(new Object[] {"CloseConnection"});
     }
@@ -90,6 +94,10 @@ class Player extends Thread
         }
     }
 
+    /**
+     * Defines how to process TCP Responses from the server.
+     * Contains the main loop of how to deal with them.
+     */
     public void processTCPResponses() {
         Object obj;
         while (true) {
@@ -131,6 +139,11 @@ class Player extends Thread
         }
     }
 
+    /**
+     * Defines how to deal with Multiplex responses from the server.
+     * Contains the main loop to wait for them.
+     * @param gameNumber the game number to listen for.
+     */
     public void processMultiplexResponses(int gameNumber) {
         try {
             MulticastSocket socket = new MulticastSocket(Global.MULTIPLEX_PORT);

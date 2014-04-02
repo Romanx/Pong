@@ -1,12 +1,9 @@
 package client;
-import common.*;
+
+import common.Global;
+import common.NetObjectWriter;
 
 import java.awt.event.KeyEvent;
-import java.io.IOException;
-import java.util.Date;
-import java.util.Random;
-
-import common.GameObject;
 /**
  * Pong controller, handles user interactions
  */

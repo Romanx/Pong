@@ -1,10 +1,13 @@
 package server;
 
-import common.*;
+import common.DEBUG;
+import common.Global;
+import server.Game.S_MulticastPongGame;
+import server.Game.S_PongGame;
+import server.Game.S_TCPPongGame;
 
 import java.net.ServerSocket;
 import java.util.concurrent.atomic.AtomicInteger;
-import server.Game.*;
 
 /**
  * Start the game server. The call to makeActiveObject() in the model starts the play of the game.
@@ -12,7 +15,7 @@ import server.Game.*;
 class Server {
     private static Boolean multiplexMode = false;
 
-    public final static AtomicInteger ACTIVE_THREAD_COUNT = new AtomicInteger(0);
+    public final static AtomicInteger ACTIVE_THREAD_COUNT = new AtomicInteger();
     private static int threadCount = 0;
 
     /**

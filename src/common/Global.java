@@ -23,7 +23,6 @@ public class Global
   public static final String HOST = "localhost"; // M/C Name
   public static final String MCA = "224.0.0.7";
 
-
   public static final String MULTIPLEX = "multiplex_mode";
 }
 

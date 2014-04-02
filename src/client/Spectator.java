@@ -12,6 +12,10 @@ import java.net.MulticastSocket;
 
 /**
  * Created by Alex on 27/03/2014.
+ *
+ * This clas describes how a spectator operates. They listen for changes
+ * from the server in the game that they are spectating and then update
+ * the model with the changes.
  */
 public class Spectator extends Thread {
 
@@ -24,6 +28,11 @@ public class Spectator extends Thread {
         this.model.setSpectator(true);
     }
 
+    /**
+     * This listens to the network for messages from the multicast server and
+     * if the game is the current game the client is spectating then it updates
+     * the model and redisplays the game.
+     */
     public void run() {
         // Listen to network to get the latest state of the game from the server
         // Update model with this information, Redisplay model

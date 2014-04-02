@@ -6,15 +6,13 @@ import common.NetObjectWriter;
 import server.S_PongModel;
 
 import java.util.Observable;
-import java.util.*;
+import java.util.Timer;
 
 /**
  * Created by Alex on 26/03/2014.
- * This class defines how a TCP/IP replies to the
- * clients with the new data.
+ * This class defines how a TCP/IP replies to the clients with the new data.
  *
  * @author Alex McAuliffe
- *
  */
 public class S_TCPPongView extends S_PongView {
     private GameObject ball;

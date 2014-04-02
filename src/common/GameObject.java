@@ -1,6 +1,6 @@
 package common;
 
-import java.io.*;
+import java.io.Serializable;
 /*
  * An Object in the game, represented as a rectangle
  *  Holds details of shape, plus possible direction of travel

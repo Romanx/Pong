@@ -26,7 +26,7 @@ public class S_MulticastPongView extends S_PongView {
      * A simple constructor that creates a DatagramSocket and sets
      * the threadNumber to send that data for.
      * @param threadNo of the activeGame.
-     * @throws SocketException
+     * @throws SocketException a SocketException.
      */
     public S_MulticastPongView(int threadNo) throws SocketException {
         super();
@@ -34,12 +34,13 @@ public class S_MulticastPongView extends S_PongView {
         this.threadNo = threadNo;
     }
 
-    @Override
+
     /**
      * Called by the observable model when a change is made, this sends
      * bat and ball details to all the people listening to the
      * multicast socket.
      */
+    @Override
     public void update(Observable aPongModel, Object arg) {
         S_PongModel model = (S_PongModel) aPongModel;
 

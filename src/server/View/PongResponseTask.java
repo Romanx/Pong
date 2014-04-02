@@ -5,7 +5,7 @@ import common.NetObjectWriter;
 import java.util.TimerTask;
 
 /**
- * A task to send the response to a given output after a
+ * A task to send the response to a given output after a period of time.
  */
 public class PongResponseTask extends TimerTask {
     private final Object[] data;

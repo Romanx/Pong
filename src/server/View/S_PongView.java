@@ -1,16 +1,11 @@
 package server.View;
 
-import common.DEBUG;
-import common.GameObject;
-import common.NetObjectWriter;
-
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Random;
 
 
 /**
- * Displays a graphical view of the game of pong
+ * Determines how the server replies with data for the clients to display.
  */
 public abstract class S_PongView implements Observer {
     /**

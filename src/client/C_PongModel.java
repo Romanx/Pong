@@ -1,9 +1,7 @@
 package client;
 
-import common.DEBUG;
 import common.GameObject;
 
-import java.util.Date;
 import java.util.Observable;
 
 import static common.Global.*;
@@ -67,6 +65,10 @@ public class C_PongModel extends Observable {
         notifyObservers();
     }
 
+    /**
+     * Calculates the average ping based on the number of requests divided by the total time.
+     * @return the current average ping.
+     */
     public long getPingTime() {
         if(numOfRequests > 0) {
             return totalRequestTime / numOfRequests;
@@ -75,15 +77,28 @@ public class C_PongModel extends Observable {
         }
     }
 
+    /**
+     * Adds a request duration to the total time requests have taken
+     * and increments the number of requests.
+     * @param timeTaken the time taken for the request.
+     */
     public void addRequestTimestamp(long timeTaken) {
         this.numOfRequests++;
         this.totalRequestTime += timeTaken;
     }
 
+    /**
+     * Returns if the player is a spectator.
+     * @return if the player is a spectator.
+     */
     public boolean isSpectator() {
         return isSpectator;
     }
 
+    /**
+     * Sets the players spectator flag to the given value.
+     * @param isSpectator the value to set the spectator flag to.
+     */
     public void setSpectator(boolean isSpectator) {
         this.isSpectator = isSpectator;
     }

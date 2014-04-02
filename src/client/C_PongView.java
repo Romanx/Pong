@@ -1,22 +1,19 @@
 package client;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.event.*;
+import common.DEBUG;
+import common.GameObject;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import javax.swing.JFrame;
-
 import java.util.Observable;
 import java.util.Observer;
-
-import common.DEBUG;
-import common.GameObject;
 
 import static common.Global.*;
 

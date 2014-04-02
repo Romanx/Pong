@@ -3,7 +3,9 @@ package server.Game;
 import common.DEBUG;
 import common.NetObjectReader;
 import common.NetObjectWriter;
-import server.*;
+import server.Player;
+import server.S_PongController;
+import server.S_PongModel;
 import server.View.S_PongView;
 import server.View.S_TCPPongView;
 

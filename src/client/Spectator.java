@@ -12,7 +12,7 @@ import java.net.MulticastSocket;
 
 /**
  * Created by Alex on 27/03/2014.
- *
+ * <p/>
  * This clas describes how a spectator operates. They listen for changes
  * from the server in the game that they are spectating and then update
  * the model with the changes.
@@ -48,21 +48,21 @@ public class Spectator extends Thread {
             DatagramPacket dgram = new DatagramPacket(b, b.length);
             double ballX, ballY, batZeroY, batOneY;
 
-            while(true) {
+            while (true) {
                 socket.receive(dgram);
 
                 ObjectInputStream o_in = new ObjectInputStream(b_in);
                 Object o = o_in.readObject();
 
-                Object[] obj = (Object[])o;
+                Object[] obj = (Object[]) o;
 
-                Integer recievedGameNo = (Integer)obj[0];
+                Integer recievedGameNo = (Integer) obj[0];
 
-                if(recievedGameNo == gameNumber) {
-                    ballX = (Double)obj[1];
-                    ballY = (Double)obj[2];
-                    batZeroY = (Double)obj[3];
-                    batOneY = (Double)obj[4];
+                if (recievedGameNo == gameNumber) {
+                    ballX = (Double) obj[1];
+                    ballY = (Double) obj[2];
+                    batZeroY = (Double) obj[3];
+                    batOneY = (Double) obj[4];
                     GameObject ball = model.getBall();
                     GameObject[] bats = model.getBats();
 

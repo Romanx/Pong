@@ -35,7 +35,7 @@ class C_PongView extends JFrame implements Observer {
     public C_PongView() {
         setSize(W, H);                        // Size of window
         addKeyListener(new Transaction());    // Called when key press
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         windowAdapter = new PongWindowAdapter();
         addWindowListener(windowAdapter);
     }

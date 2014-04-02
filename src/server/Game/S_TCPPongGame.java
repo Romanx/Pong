@@ -15,11 +15,10 @@ import java.net.Socket;
 
 /**
  * Created by Alex on 26/03/2014.
- *
+ * <p/>
  * This is a subclass of the PongGame defining how a TCP/IP game makes
  * contact with a client and starts a TCP/IP PongView and a player class
  * with multicast set to false.
- *
  */
 public class S_TCPPongGame extends S_PongGame {
     private NetObjectWriter p0, p1 = null;
@@ -30,6 +29,7 @@ public class S_TCPPongGame extends S_PongGame {
 
     /**
      * A concrete method defining how a TCP Pong Game connects to its client.
+     *
      * @param model to update the data on.
      */
     @Override

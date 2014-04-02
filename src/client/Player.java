@@ -13,8 +13,7 @@ import java.net.Socket;
  * Individual player run as a separate thread to allow
  * updates immediately the bat is moved
  */
-public class Player extends Thread
-{
+public class Player extends Thread {
     private C_PongModel model;
     private Socket socket;
     private NetObjectReader in;
@@ -34,6 +33,7 @@ public class Player extends Thread
 
     /**
      * Returns the players NetObjectWriter to avoid the issue with creating more than one.
+     *
      * @return the players NetObjectWriter
      */
     public NetObjectWriter getPlayerOutput() {
@@ -44,7 +44,7 @@ public class Player extends Thread
      * Sends the close connection command to the server.
      */
     public void closeConnection() {
-        this.out.put(new Object[] {"CloseConnection"});
+        this.out.put(new Object[]{"CloseConnection"});
     }
 
     /**
@@ -62,7 +62,7 @@ public class Player extends Thread
             try {
                 out = new NetObjectWriter(this.socket);
                 in = new NetObjectReader(this.socket);
-            } catch(Exception ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
                 DEBUG.error("Exception player.constructor : Client - " + ex.getMessage());
             }
@@ -75,12 +75,12 @@ public class Player extends Thread
                 Object[] messages = (Object[]) obj;
                 DEBUG.trace("RESULT: %s", messages[0]);
 
-                String response = (String)messages[0];
-                Boolean isMultiplex = (Boolean)messages[1];
-                int gameNumber = (Integer)messages[2];
+                String response = (String) messages[0];
+                Boolean isMultiplex = (Boolean) messages[1];
+                int gameNumber = (Integer) messages[2];
 
-                if(response.equals("Connected")) {
-                    if(isMultiplex) {
+                if (response.equals("Connected")) {
+                    if (isMultiplex) {
                         this.processMultiplexResponses(gameNumber);
                     } else {
                         this.processTCPResponses();
@@ -88,7 +88,7 @@ public class Player extends Thread
                 }
             }
 
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             DEBUG.error("Exception player.constructor : Client - " + ex.getMessage());
         }
@@ -108,23 +108,23 @@ public class Player extends Thread
 
                 // Pull the data from the serialised message. Currently in two sections,
                 // Object array of GameObject data and the last request time.
-                Object[] result = (Object[])obj;
-                Object[] gameObjects = (Object[])result[0];
+                Object[] result = (Object[]) obj;
+                Object[] gameObjects = (Object[]) result[0];
 
                 //Define variable here rather than pulling out of the array twice.
-                timestamp = (Long)result[1];
+                timestamp = (Long) result[1];
 
                 // Only update the timestamp if we've sent a request since last update.
-                if(timestamp > 0) {
+                if (timestamp > 0) {
                     model.addRequestTimestamp(System.currentTimeMillis() - timestamp);
                 }
 
                 // Assignments with casting to the correct types. Since they're stored as Objects i have to cast
                 // them to Boxed primative types.
-                ballX = (Double)gameObjects[0];
-                ballY = (Double)gameObjects[1];
-                batZeroY = (Double)gameObjects[2];
-                batOneY = (Double)gameObjects[3];
+                ballX = (Double) gameObjects[0];
+                ballY = (Double) gameObjects[1];
+                batZeroY = (Double) gameObjects[2];
+                batOneY = (Double) gameObjects[3];
                 GameObject ball = model.getBall();
                 GameObject[] bats = model.getBats();
 
@@ -142,6 +142,7 @@ public class Player extends Thread
     /**
      * Defines how to deal with Multiplex responses from the server.
      * Contains the main loop to wait for them.
+     *
      * @param gameNumber the game number to listen for.
      */
     public void processMultiplexResponses(int gameNumber) {
@@ -155,21 +156,21 @@ public class Player extends Thread
             DatagramPacket dgram = new DatagramPacket(b, b.length);
             double ballX, ballY, batZeroY, batOneY;
 
-            while(true) {
+            while (true) {
                 socket.receive(dgram);
 
                 ObjectInputStream o_in = new ObjectInputStream(b_in);
                 Object o = o_in.readObject();
 
-                Object[] obj = (Object[])o;
+                Object[] obj = (Object[]) o;
 
-                Integer recievedGameNo = (Integer)obj[0];
+                Integer recievedGameNo = (Integer) obj[0];
 
-                if(recievedGameNo == gameNumber) {
-                    ballX = (Double)obj[1];
-                    ballY = (Double)obj[2];
-                    batZeroY = (Double)obj[3];
-                    batOneY = (Double)obj[4];
+                if (recievedGameNo == gameNumber) {
+                    ballX = (Double) obj[1];
+                    ballY = (Double) obj[2];
+                    batZeroY = (Double) obj[3];
+                    batOneY = (Double) obj[4];
                     GameObject ball = model.getBall();
                     GameObject[] bats = model.getBats();
 

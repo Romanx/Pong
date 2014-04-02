@@ -41,13 +41,13 @@ public class S_TCPPongView extends S_PongView {
         playerOnePing = model.getAverageRequestTime(0);
         playerTwoPing = model.getAverageRequestTime(1);
 
-        Object[] result = new Object[] { ball.getX(), ball.getY(), this.bats[0].getY(), this.bats[1].getY()};
+        Object[] result = new Object[]{ball.getX(), ball.getY(), this.bats[0].getY(), this.bats[1].getY()};
 
         // Now need to send position of game objects to the client as the model on the server has changed
         // If player two's request time is higher than player one.
-        if(playerOnePing < playerTwoPing) {
+        if (playerOnePing < playerTwoPing) {
             long timeDiff = playerTwoPing - playerOnePing;
-            right.put(new Object[] {result, model.getRequestTime(1)});
+            right.put(new Object[]{result, model.getRequestTime(1)});
 
             timer.schedule(new PongResponseTask(new Object[]{result, model.getRequestTime(0)}, left), timeDiff);
             DEBUG.trace("Player Ones Ping is Lower than Player Twos.");

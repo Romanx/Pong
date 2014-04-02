@@ -22,11 +22,11 @@ class Server {
      * Returns the correct gameType depending on if the server is a multiplexed server or not.
      *
      * @param threadNo the threadNumber.
-     * @param ss the server socket.
+     * @param ss       the server socket.
      * @return a typed game depending on if the game is Multiplexed or not.
      */
     public static S_PongGame getTypedGame(int threadNo, ServerSocket ss) {
-        if(multiplexMode) {
+        if (multiplexMode) {
             return new S_MulticastPongGame(threadNo, ss);
         } else {
             return new S_TCPPongGame(threadNo, ss);
@@ -37,21 +37,21 @@ class Server {
         try {
 
             //Determines if it's a Multiplex server or not.
-            if(args.length > 0 && args[0].equals(Global.MULTIPLEX)) {
+            if (args.length > 0 && args[0].equals(Global.MULTIPLEX)) {
                 multiplexMode = true;
             }
 
             ServerSocket socket = new ServerSocket(Global.PORT);  // Server Socket
 
-            while(true) {
+            while (true) {
                 //TODO: Remove the limit or adjust for a ThreadPool.
-                while(ACTIVE_THREAD_COUNT.get() < 3) {
+                while (ACTIVE_THREAD_COUNT.get() < 3) {
                     ACTIVE_THREAD_COUNT.getAndIncrement();
                     (getTypedGame(threadCount++, socket)).start();
                 }
             }
 
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             DEBUG.error("%s : Location[Server.main()]", ex.getMessage());
         }

@@ -9,13 +9,12 @@ import java.net.Socket;
 /**
  * Start the client that will display the game for a player
  */
-class Client
-{
+class Client {
     private static boolean isSpectator;
     private static int gameNumber;
 
     public static void main(String args[]) {
-        if(args.length > 0) {
+        if (args.length > 0) {
             isSpectator = true;
             gameNumber = Integer.parseInt(args[0]);
         }
@@ -27,12 +26,12 @@ class Client
      */
     public void start() {
         DEBUG.trace("Pong Client");
-        DEBUG.set( true );
+        DEBUG.set(true);
         C_PongModel model = new C_PongModel();
         C_PongView view = new C_PongView();
         C_PongController cont = new C_PongController(model, view);
 
-        if(!isSpectator) {
+        if (!isSpectator) {
             makeContactWithServer(model, cont);
         } else {
             startSpectating(model);
@@ -43,7 +42,6 @@ class Client
     }
 
     /**
-     *
      * This will setup the Spectator thread which doesn't need contact
      * with the server but needs to know how to listen to changes.
      *
@@ -68,7 +66,7 @@ class Client
             // Also starts the Player task that get the current state of the game from the server
             Socket s = new Socket(Global.HOST, Global.PORT);
 
-            if(s.isConnected()) {
+            if (s.isConnected()) {
 
                 DEBUG.trace("Trying to Connect.");
                 Player p = new Player(model, s);
@@ -76,11 +74,9 @@ class Client
                 p.start();
             }
 
-        }
-        catch (ConnectException ex) {
+        } catch (ConnectException ex) {
             DEBUG.trace("%s  : Location[Client.makeContactWithServer()]", "The Server does not seem to be running.");
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             DEBUG.error("%s : Location[Client.makeContactWithServer()]", ex.getMessage());
         }

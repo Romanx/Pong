@@ -10,18 +10,17 @@ import static common.Global.*;
 /**
  * Model of the game of pong
  * The active object ActiveModel does the work of moving the ball
- *
+ * <p/>
  * This thread also contains the currentRequestTimes, totalRequestTimes
  * and totalRequestAmounts for each players along with get and set methods
  * for them.
- *
  */
 public class S_PongModel extends Observable {
     private GameObject ball = new GameObject(W / 2, H / 2, BALL_SIZE, BALL_SIZE);
     private GameObject bats[] = new GameObject[2];
-    private long currentRequestTime[] = new long[] { 0L, 0L };
-    private long totalRequestTimes[] = new long[] { 0L, 0L };
-    private int totalRequestAmount[] = new int[] { 0, 0 };
+    private long currentRequestTime[] = new long[]{0L, 0L};
+    private long totalRequestTimes[] = new long[]{0L, 0L};
+    private int totalRequestAmount[] = new int[]{0, 0};
 
     private Thread activeModel;
 
@@ -103,7 +102,7 @@ public class S_PongModel extends Observable {
      * @return the current requestTime or Zero if out of bounds.
      */
     public long getRequestTime(int playerNumber) {
-        if(playerNumber < this.currentRequestTime.length) {
+        if (playerNumber < this.currentRequestTime.length) {
             return this.currentRequestTime[playerNumber];
         } else {
             return 0;
@@ -115,10 +114,10 @@ public class S_PongModel extends Observable {
      * player number then does nothing.
      *
      * @param playerNumber the playerNumber to set the requestTime for.
-     * @param requestTime the new requestTime to set for the player.
+     * @param requestTime  the new requestTime to set for the player.
      */
     public void setRequestTime(int playerNumber, long requestTime) {
-        if(playerNumber < this.currentRequestTime.length) {
+        if (playerNumber < this.currentRequestTime.length) {
             this.currentRequestTime[playerNumber] = requestTime;
         }
     }
@@ -126,14 +125,14 @@ public class S_PongModel extends Observable {
     /**
      * Adds a new requestTime to the totalRequestTime for the given player.
      * If the player is not valid then does nothing.
-     *
+     * <p/>
      * This also increments the totalAmount of requests for the player.
      *
      * @param playerNumber the playerNumber to add the requestTime for.
-     * @param requestTime the new requestTime to add for the player.
+     * @param requestTime  the new requestTime to add for the player.
      */
     public void addToTotalRequestTime(int playerNumber, long requestTime) {
-        if(playerNumber < this.totalRequestTimes.length) {
+        if (playerNumber < this.totalRequestTimes.length) {
             this.totalRequestTimes[playerNumber] += requestTime;
             this.totalRequestAmount[playerNumber]++;
         }
@@ -147,13 +146,12 @@ public class S_PongModel extends Observable {
      */
     public long getAverageRequestTime(int playerNumber) {
 
-        if(playerNumber < this.totalRequestTimes.length &&
-           playerNumber < this.totalRequestAmount.length)
-        {
+        if (playerNumber < this.totalRequestTimes.length &&
+                playerNumber < this.totalRequestAmount.length) {
             int totalRequestAmount = this.totalRequestAmount[playerNumber];
             long totalRequestTime = this.totalRequestTimes[playerNumber];
 
-            if(totalRequestAmount > 0) {
+            if (totalRequestAmount > 0) {
                 return totalRequestTime / totalRequestAmount;
             }
         }
@@ -162,6 +160,7 @@ public class S_PongModel extends Observable {
 
     /**
      * Returns the state of the game.
+     *
      * @return if the game is shutdown.
      */
     public boolean getShutdown() {
@@ -170,6 +169,7 @@ public class S_PongModel extends Observable {
 
     /**
      * Sets the state of the game.
+     *
      * @param shutdown the value to set the state of the game to.
      */
     public void setShutdown(boolean shutdown) {
@@ -178,7 +178,8 @@ public class S_PongModel extends Observable {
 
     /**
      * Sets the gameNumber for the game.
-     * @param gameNumber
+     *
+     * @param gameNumber the game number.
      */
     public void setGameNumber(int gameNumber) {
         this.gameNumber = gameNumber;
@@ -186,6 +187,7 @@ public class S_PongModel extends Observable {
 
     /**
      * Returns the game number for the game.
+     *
      * @return the gameNumber for the game.
      */
     public int getGameNumber() {

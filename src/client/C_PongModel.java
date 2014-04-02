@@ -67,10 +67,11 @@ public class C_PongModel extends Observable {
 
     /**
      * Calculates the average ping based on the number of requests divided by the total time.
+     *
      * @return the current average ping.
      */
     public long getPingTime() {
-        if(numOfRequests > 0) {
+        if (numOfRequests > 0) {
             return totalRequestTime / numOfRequests;
         } else {
             return 0L;
@@ -80,6 +81,7 @@ public class C_PongModel extends Observable {
     /**
      * Adds a request duration to the total time requests have taken
      * and increments the number of requests.
+     *
      * @param timeTaken the time taken for the request.
      */
     public void addRequestTimestamp(long timeTaken) {
@@ -89,6 +91,7 @@ public class C_PongModel extends Observable {
 
     /**
      * Returns if the player is a spectator.
+     *
      * @return if the player is a spectator.
      */
     public boolean isSpectator() {
@@ -97,6 +100,7 @@ public class C_PongModel extends Observable {
 
     /**
      * Sets the players spectator flag to the given value.
+     *
      * @param isSpectator the value to set the spectator flag to.
      */
     public void setSpectator(boolean isSpectator) {

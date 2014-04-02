@@ -15,10 +15,9 @@ import java.net.SocketException;
 
 /**
  * Created by Alex on 26/03/2014.
- *
+ * <p/>
  * This is a subclass of the PongGame defining how a Multicast game makes
  * contact with a client and starts a Multicast pong view.
- *
  */
 public class S_MulticastPongGame extends S_PongGame {
     private NetObjectWriter p0, p1 = null;
@@ -30,6 +29,7 @@ public class S_MulticastPongGame extends S_PongGame {
     /**
      * This is a Multicast version of makeContactWithClients.
      * This tells the player class to tell the player it's a multicast game.
+     *
      * @param model the model to update.
      */
     @Override
